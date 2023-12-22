@@ -5,8 +5,8 @@ import styles from "@/pages/content/index.less";
 
 export default function HomePage() {
   return (
-      <Row>
-          <Col className={styles.pad} span={10} offset={7}>
+      <Row className={styles.center}>
+          <Col className={styles.pad} xs={24} sm={24} md={24} lg={24} xl={{ span: 10, offset: 7}}>
               <div>
                   <h2>镀金时代</h2>
                   <span><a className={styles.author}>架构师之路</a> <span className={styles.tag}>2023-12-05 19:34 发表于北京</span></span>
@@ -35,6 +35,15 @@ export default function HomePage() {
                       <p>我们大脑有说不清楚的局限:我们对自己认为熟知的事物确信不疑，我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。</p>
                       <p>书里不仅详细阐述了这种思考模式给我们带来的负面影响，同时通过经典有趣的行为实验来引导我们认识习惯性思考模式的弊端。</p>
                       <p>书告诉我们在什么情况下可以相信自己的直觉，什么时候又不能相信。并有效实用的办法能帮助我们做出理性的决策，避免那些常常使我们陷入麻烦的思维失误。</p>
+                  </p>
+                  <p>
+
+                      调研：
+                      朋友，最近读了一些什么书？
+                      欢迎推荐给我，我转荐好书给大家？
+                  </p>
+                  <p>
+                      #读书会 12
                   </p>
               </div>
           </Col>
