@@ -9,7 +9,7 @@ export default function HomePage() {
           <Col className={styles.pad} xs={24} sm={24} md={24} lg={24} xl={{ span: 10, offset: 7}}>
               <div>
                   <h2>镀金时代</h2>
-                  <span><a className={styles.author}>架构师之路</a> <span className={styles.tag}>2023-12-05 19:34 发表于北京</span></span>
+                  <span><a className={styles.author}>栗·YLeseclaireurs</a> <span className={styles.tag}> 2023-12-05 19:34 发表于北京 </span></span>
                   <p>
                       <p>
                           11月比较忙，重读了之前读过的2本好书：
