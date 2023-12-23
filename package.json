@@ -9,10 +9,21 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@toast-ui/editor-plugin-chart": "^3.0.1",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
+    "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
+    "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
+    "@toast-ui/editor-plugin-uml": "^3.0.1",
+    "@toast-ui/react-editor": "^3.2.3",
+    "prismjs": "^1.29.0",
+    "@umijs/max": "^4.0.90",
+    "ahooks": "^3.7.8",
     "antd": "^5.12.4",
-    "umi": "^4.0.90"
+    "umi": "^4.0.90",
+    "umi-request": "^1.4.0"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "typescript": "^5.0.3"
