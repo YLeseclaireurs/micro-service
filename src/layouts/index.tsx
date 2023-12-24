@@ -5,15 +5,9 @@ export default function Layout() {
     return (
         <div className={styles.navs}>
             {/*<ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/docs">Docs</Link>
-                </li>
-                <li>
-                    <a href="https://github.com/umijs/umi">Github</a>
-                </li>
+                <li><Link to="/"> 首页</Link></li>
+                <li><Link  to="/docs"> Maps</Link></li>
+                <li><a href="detail"> 栗</a></li>
             </ul>*/}
             <Outlet />
         </div>
