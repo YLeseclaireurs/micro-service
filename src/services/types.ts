@@ -1,4 +1,11 @@
 declare namespace API {
+    type ArticleDetailRes = {
+        code:number;
+        message:string;
+        data: Article;
+    };
+
+
     type Article = {
         id?: number;
         username?: string;

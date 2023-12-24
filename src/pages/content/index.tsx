@@ -30,11 +30,17 @@ export default function HomePage() {
     const params = {
         id:1
     };
-    const {data } = useRequest(() => GetArticleDetail(params));
-    console.log(data)
+    //const {data } = useRequest(() => GetArticleDetail(params));
+    //console.log(data)
 
 
-    
+    const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(false);
+    GetArticleDetail(params).then((res) => {
+        setContent(res.data.content? res.data.content :  "");
+        setLoading(true)
+        console.log("请求返回值", loading, content)
+    });
 
 
     const editor_ref = useRef<Editor>(null);
@@ -50,16 +56,17 @@ export default function HomePage() {
             <div className={styles.content}>
                 <h2>镀金时代</h2>
                 <span><a className={styles.author}>栗·YLeseclaireurs</a> <span className={styles.tag}> 2023-12-05 19:34 发表于北京 </span></span>
-                <Viewer
+                {/*<div>{content}</div>*/}
+                {loading && <Viewer
                     ref={editor_ref}
-                    initialValue={initData}
+                    initialValue={content}
                     plugins={[
                         [codeSyntaxHighlightPlugin, { highlighter: Prism }],
                         umlPlugin,
                         [chartPlugin, chartOptions],
                         tableMergedCellPlugin,
                     ]}
-                />
+                />}
                 <p>#读书会 12</p>
             </div>
         </div>
