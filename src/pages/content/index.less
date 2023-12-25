@@ -11,16 +11,17 @@
     padding: 0 10px;
   }
 }
-@media all and (min-width: 901px) and (max-width: 1300px)
+@media all and (min-width: 901px) and (max-width: 2000px)
 {
   .content {
     font-family: sans-serif;
-    width: 600px;
+    width: 700px;
     text-align: left;
     margin: 0 auto;
+
   }
 }
-@media all and (min-width: 1301px) {
+@media all and (min-width: 2001px) {
   .content {
     font-family: sans-serif;
     width: 1000px;
@@ -32,14 +33,27 @@
 
 .content ul {
   display: block;
-
   padding: 10px 0 0 17px;
 }
 .content p {
   font-size:15px;
   margin-top: 25px;
   font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
+  word-wrap: break-word!important;
+  text-align: justify;
+
 }
+.content li {
+  margin-right:0px;
+}
+.content li p {
+  font-size:15px;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
+  word-wrap: break-word!important;
+  text-align: justify;
+}
+
+
 
 .author {
   color:darkblue;

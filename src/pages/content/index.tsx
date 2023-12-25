@@ -24,7 +24,7 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import {GetArticleDetail} from "@/services/article";
 
 import {initData} from "@/pages/content/data";
-import { QRCode } from 'antd';
+import { QRCode,Affix,Button } from 'antd';
 
 
 export default function DetailPage() {
@@ -52,13 +52,11 @@ export default function DetailPage() {
         maxHeight: 300,
     };
     const text = "http://192.168.1.101:8001/"
-
     return (
         <div className={styles.app}>
             <div className={styles.content}>
-                <QRCode className={styles.qrcode} value={text} />
                 <h2>镀金时代</h2>
-                <span><a className={styles.author}>栗·YLeseclaireurs</a> <span className={styles.tag}> 2023-12-05 19:34 发表于北京 </span></span>
+                <span className={styles.tag}><a className={styles.author}>栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
                 {/*<div>{content}</div>*/}
                 {loading && <Viewer
                     ref={editor_ref}
