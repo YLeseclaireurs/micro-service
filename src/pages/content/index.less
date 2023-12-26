@@ -8,9 +8,17 @@
     font-family: sans-serif;
     text-align: left;
     margin: 0 auto;
-    padding: 0 10px;
+    padding: 0 13px;
+  }
+  .content p {
+    font-size:16px;
+    margin-top: 32px;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
+    word-wrap: break-word!important;
+    text-align: justify;
   }
 }
+
 @media all and (min-width: 901px) and (max-width: 2000px)
 {
   .content {
@@ -18,9 +26,16 @@
     width: 700px;
     text-align: left;
     margin: 0 auto;
-
+  }
+  .content p {
+    font-size:15px;
+    margin-top: 32px;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
+    word-wrap: break-word!important;
+    text-align: justify;
   }
 }
+
 @media all and (min-width: 2001px) {
   .content {
     font-family: sans-serif;
@@ -28,23 +43,22 @@
     text-align: left;
     margin: 0 auto;
   }
+  .content p {
+    font-size:15px;
+    margin-top: 32px;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
+    word-wrap: break-word!important;
+    text-align: justify;
+  }
 }
-
 
 .content ul {
   display: block;
-  padding: 10px 0 0 17px;
-}
-.content p {
-  font-size:15px;
-  margin-top: 25px;
-  font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
-  word-wrap: break-word!important;
-  text-align: justify;
-
+  padding: 2px 0 0 17px;
 }
 .content li {
   margin-right:0px;
+  marin-top:10px;
 }
 .content li p {
   font-size:15px;
@@ -52,8 +66,6 @@
   word-wrap: break-word!important;
   text-align: justify;
 }
-
-
 
 .author {
   color:darkblue;
@@ -87,5 +99,82 @@
   top:0px;
   right:0px;
 }
+
+
+
+
+
+
+.page_up_down {
+  background: #FAFAFA;
+  min-height: 100px;
+  margin-top:20px;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.page_up_down div.topic {
+  font-size: 13px;
+  color: #888;
+  padding: 10px 20px;
+}
+.album_read_bd {
+  font-size: 13px;
+}
+.album_read_nav_btn {
+  display: block;
+  color: rgba(0,0,0,.9);
+  font-weight: 500;
+}
+.album_read_nav_title {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.album_read_nav_title_inner {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.album_read_nav_item.album_read_nav_prev {
+  text-align: left;
+  width: 40%;
+  display: block;
+  float: left;
+  padding: 0 0 0 20px;
+}
+.album_read_nav_item.album_read_nav_next {
+  text-align: right;
+  width: 40%;
+  display: block;
+  float: right;
+  padding: 0 20px 0 0 ;
+}
+
+
+.some_likes {
+  height: 100px;
+  margin-top:20px;
+  background: #FFF;
+  min-height: 340px;
+  background: #FAFAFA;
+  padding: 10px 20px;
+}
+.function_hd {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(0,0,0,.3);
+  margin: 5px 0 5px 0;
+
+}
+.function_hd .js_related_title {
+  margin-bottom: 20px;
+}
+
+
 
 

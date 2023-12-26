@@ -23,18 +23,17 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 
 import {GetArticleDetail} from "@/services/article";
 
-import {initData} from "@/pages/content/data";
-import { QRCode,Affix,Button } from 'antd';
+import {initData, data} from "@/pages/content/data";
+import {QRCode, Affix, Button, List} from 'antd';
 
 
 export default function DetailPage() {
+    const editor_ref = useRef<Editor>(null);
+
+    // 页面数据获取
     const params = {
         id:1
     };
-    //const {data } = useRequest(() => GetArticleDetail(params));
-    //console.log(data)
-
-
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
     GetArticleDetail(params).then((res) => {
@@ -44,14 +43,14 @@ export default function DetailPage() {
     });
 
 
-    const editor_ref = useRef<Editor>(null);
+    // Markdown中的图表配置项
     const chartOptions = {
         minWidth: 100,
         maxWidth: 600,
         minHeight: 100,
         maxHeight: 300,
     };
-    const text = "http://192.168.1.101:8001/"
+
     return (
         <div className={styles.app}>
             <div className={styles.content}>
@@ -68,7 +67,37 @@ export default function DetailPage() {
                         tableMergedCellPlugin,
                     ]}
                 />}
-                <p>#读书会 12</p>
+                <div className={styles.page_up_down}>
+                    <div className={styles.topic}>读书会 · 目录 · 12篇</div>
+                    <div className="album_read_bd">
+                        <span className="album_read_nav_item album_read_nav_prev">
+                            <span className="album_read_nav_inner"><span className="album_read_nav_btn">《上一篇</span>
+                                <span className="album_read_nav_title"><span className="album_read_nav_title_inner">假期准备读的2本书</span></span>
+                            </span>
+                        </span>
+                        <span className="album_read_nav_item album_read_nav_next">
+                            <span className="album_read_nav_inner">
+                                <span className="album_read_nav_btn">下一篇》</span>
+                                <span className="album_read_nav_title"><span className="album_read_nav_title_inner">11月读的2本书</span></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div className="some_likes">
+                    <div className="function_hd js_related_title">喜欢此内容的人还喜欢</div>
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={(item, index) => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={<a href={item.href}>{item.title}</a>}
+                                    description={<span>{item.desc}</span>}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                </div>
             </div>
         </div>
     );
