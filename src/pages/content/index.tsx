@@ -19,12 +19,16 @@ import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-tab
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
+import { Link } from 'umi';
 
 
 import {GetArticleDetail} from "@/services/article";
 
 import {initData, data} from "@/pages/content/data";
 import {QRCode, Affix, Button, List} from 'antd';
+
+import { BackTop } from '@douyinfe/semi-ui';
+import { IconArrowUp } from '@douyinfe/semi-icons';
 
 
 export default function DetailPage() {
@@ -50,11 +54,11 @@ export default function DetailPage() {
         minHeight: 100,
         maxHeight: 300,
     };
-
     return (
         <div className={styles.app}>
             <div className={styles.content}>
-                <h2>镀金时代</h2>
+                <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
+                <h2>你读过最有力量的一段文字是什么？</h2>
                 <span className={styles.tag}><a className={styles.author}>栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
                 {/*<div>{content}</div>*/}
                 {loading && <Viewer
@@ -71,15 +75,20 @@ export default function DetailPage() {
                     <div className={styles.topic}>读书会 · 目录 · 12篇</div>
                     <div className="album_read_bd">
                         <span className="album_read_nav_item album_read_nav_prev">
-                            <span className="album_read_nav_inner"><span className="album_read_nav_btn">《上一篇</span>
-                                <span className="album_read_nav_title"><span className="album_read_nav_title_inner">假期准备读的2本书</span></span>
-                            </span>
+                            <Link to="/">
+                                <span  className="album_read_nav_inner">
+                                    <span className="album_read_nav_btn">《上一篇</span>
+                                    <span className="album_read_nav_btn">假期准备读的2本书</span>
+                                </span>
+                            </Link>
                         </span>
                         <span className="album_read_nav_item album_read_nav_next">
-                            <span className="album_read_nav_inner">
-                                <span className="album_read_nav_btn">下一篇》</span>
-                                <span className="album_read_nav_title"><span className="album_read_nav_title_inner">11月读的2本书</span></span>
-                            </span>
+                            <Link to="/">
+                                <span className="album_read_nav_inner">
+                                    <span className="album_read_nav_btn">下一篇》</span>
+                                    <span className="album_read_nav_btn">11月读的2本书</span>
+                                </span>
+                            </Link>
                         </span>
                     </div>
                 </div>

@@ -9,6 +9,8 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@douyinfe/semi-icons": "^2.49.2",
+    "@douyinfe/semi-ui": "^2.49.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@toast-ui/editor-plugin-chart": "^3.0.1",
