@@ -12,7 +12,7 @@ export default function Comments() {
 
 
     type DataType = {
-        key: string;
+        id: number;
         uid: number;
         username: string;
         content: string;
@@ -20,14 +20,14 @@ export default function Comments() {
     };
     const comments:DataType[] = [
         {
-            key: "1",
+            id: 1,
             uid: 1,
             username: "栗",
             content: "我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。",
             avatar: "https://picx.zhimg.com/8589ed3e65ebd6011d8f9268696688af_l.jpg?source=2c26e567",
         },
         {
-            key: "2",
+            id: 2,
             uid: 2,
             username: "星",
             content: "其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。",
@@ -39,7 +39,7 @@ export default function Comments() {
 
 
     const commentList = comments.map(comment =>
-        <div className="comments-item">
+        <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
                 <Avatar size={50}  src={comment.avatar} />
             </div>
@@ -68,7 +68,7 @@ export default function Comments() {
     const submitComment = (value:any)  => {
 
         const item:DataType = {
-            key: "3",
+            id: 3,
             uid: uid,
             username: "宝",
             content: comment,
