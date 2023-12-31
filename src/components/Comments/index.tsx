@@ -9,6 +9,7 @@ export default function Comments() {
     const [comment, setComment] = useState("");
     const [uid, setUID] = useState(0)
     const [targetUID, setTargetUID] = useState(0)
+    const [count, setCount] = useState(3)
 
 
     type DataType = {
@@ -18,7 +19,7 @@ export default function Comments() {
         content: string;
         avatar: string;
     };
-    const comments:DataType[] = [
+    const [list, setList] = useState<DataType[]>([
         {
             id: 1,
             uid: 1,
@@ -33,12 +34,9 @@ export default function Comments() {
             content: "其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。",
             avatar: "https://pic1.zhimg.com/v2-93446443e78697dbe2e4a052c5a47b12_l.jpg?source=32738c0c",
         }
-    ]
-    const [list, setList] = useState(comments)
+    ])
 
-
-
-    const commentList = comments.map(comment =>
+    const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
                 <Avatar size={50}  src={comment.avatar} />
@@ -65,21 +63,18 @@ export default function Comments() {
         console.log('Change:', comment);
     };
 
-    const submitComment = (value:any)  => {
-
+    const submitComment = ()  => {
+        setCount(count+1)
         const item:DataType = {
-            id: 3,
+            id: count,
             uid: uid,
             username: "宝",
             content: comment,
             avatar: "https://picx.zhimg.com/v2-0b1e0cff6273b779e1c0a13f0f737cf9_l.jpg?source=2c26e567",
         }
+        setList([item, ...list])
 
-        list.push(item)
-        setList(list)
-
-        console.log("list", list, value)
-
+        console.log("ID", count)
     }
     return (
         <div className="comments">
