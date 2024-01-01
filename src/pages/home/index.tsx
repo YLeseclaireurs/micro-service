@@ -7,6 +7,7 @@ import styles from "@/pages/home/index.less";
 import React, { useEffect, useState } from 'react';
 import Comments from "@/components/Comments";
 
+
 export default  function HomePage () {
 
     const style = {
@@ -70,7 +71,7 @@ export default  function HomePage () {
                               书告诉我们在什么情况下可以相信自己的直觉，什么时候又不能相信。并有效实用的办法能帮助我们做出理性的决策，避免那些常常使我们陷入麻烦的思维失误。
                           </p>
                       </div>
-                      <Comments></Comments>
+                      <Comments/>
                   </TabPane>
                   <TabPane tab={<span><DribbbleOutlined />&nbsp;架构</span>} itemKey="2">
                       <div  className={styles.item}>

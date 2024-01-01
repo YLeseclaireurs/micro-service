@@ -1,17 +1,9 @@
-import { Flex, Input, Avatar,Button } from 'antd';
+import { message, Flex, Input, Avatar,Button } from 'antd';
 import  "./index.less";
 import { CommentOutlined,StarOutlined,HeartOutlined } from '@ant-design/icons';
 import React, {useState} from "react";
 
 export default function Comments() {
-    const { TextArea } = Input;
-
-    const [comment, setComment] = useState("");
-    const [uid, setUID] = useState(0)
-    const [targetUID, setTargetUID] = useState(0)
-    const [count, setCount] = useState(3)
-
-
     type DataType = {
         id: number;
         uid: number;
@@ -19,6 +11,14 @@ export default function Comments() {
         content: string;
         avatar: string;
     };
+    const [messageApi, contextHolder] = message.useMessage();
+    const { TextArea } = Input;
+    const [comment, setComment] = useState("");
+    const [uid, setUID] = useState(0)
+    const [targetUID, setTargetUID] = useState(0)
+    const [count, setCount] = useState(3)
+    const [showComment, setShowComment] = useState(false)
+    const [showReply, setShowReply] = useState(false)
     const [list, setList] = useState<DataType[]>([
         {
             id: 1,
@@ -35,7 +35,9 @@ export default function Comments() {
             avatar: "https://pic1.zhimg.com/v2-93446443e78697dbe2e4a052c5a47b12_l.jpg?source=32738c0c",
         }
     ])
-
+    const showReplyEditor = () => {
+        setShowReply(true)
+    }
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
@@ -51,12 +53,11 @@ export default function Comments() {
                 <div className="comments-content-container-tools">
                     <HeartOutlined /> 83 &nbsp;
                     <StarOutlined /> 3 &nbsp;
-                    <CommentOutlined /> Reply&nbsp;
+                    <span><CommentOutlined /> Reply&nbsp;</span>
                 </div>
             </div>
         </div>
     );
-
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setComment(e.target.value.toString())
@@ -64,6 +65,14 @@ export default function Comments() {
     };
 
     const submitComment = ()  => {
+        if (comment == "") {
+            messageApi.open({
+                type: 'warning',
+                content: "评论内容不能为空",
+            });
+            return
+        }
+
         setCount(count+1)
         const item:DataType = {
             id: count,
@@ -73,25 +82,37 @@ export default function Comments() {
             avatar: "https://picx.zhimg.com/v2-0b1e0cff6273b779e1c0a13f0f737cf9_l.jpg?source=2c26e567",
         }
         setList([item, ...list])
-
         console.log("ID", count)
+        setComment("")
     }
+
+    const showCommentEditor = () => {
+        setShowComment(true)
+        console.log("show", showComment)
+    }
+
     return (
-        <div className="comments">
-            <h4>见解：</h4>
-            <div className="comments-editor">
-                <Flex vertical gap={32}>
-                    <TextArea
-                        maxLength={100}
-                        onChange={onChange}
-                        placeholder="写下你的想法"
-                        style={{ height: 80, resize: 'none' }}
-                    />
-                </Flex>
-                <div className="comments-editor-bottom">
-                    <Button onClick={submitComment}>发布评论</Button>
-                </div>
+        <div className="comments" >
+            {contextHolder}
+            <div className="comments-header">
+                <div className="selector"><span>留言列表</span></div>
+                <div className="writer"><span ><Button onClick={showCommentEditor} type="text">写留言</Button></span></div>
             </div>
+            {showComment &&
+                <div className="comments-editor">
+                    <Flex vertical gap={32}>
+                        <TextArea
+                            maxLength={100}
+                            onChange={onChange}
+                            placeholder="写下你的想法"
+                            style={{ height: 80, resize: 'none' }}
+                        />
+                    </Flex>
+                    <div className="comments-editor-bottom">
+                        <Button  onClick={submitComment}>发布评论</Button>
+                    </div>
+                </div>
+            }
             <div className="comments-list">
                 {commentList}
             </div>
