@@ -29,22 +29,23 @@ import {QRCode, Affix, Button, List} from 'antd';
 import { BackTop } from '@douyinfe/semi-ui';
 import { IconArrowUp } from '@douyinfe/semi-icons';
 
-
 export default function DetailPage() {
-    const editor_ref = useRef<Editor>(null);
-
-    // 页面数据获取
+// 页面数据获取
     const params = {
         id:1
     };
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
-    GetArticleDetail(params).then((res) => {
-        setContent(res.data.content? res.data.content :  "");
-        setLoading(true)
-        console.log("请求返回值", loading, content)
-    });
+    const editor_ref = useRef<Editor>(null);
 
+    useEffect(() => {
+        document.title = '你读过最有力量的一段文字是什么？';
+        content == "" && GetArticleDetail(params).then((res) => {
+            setContent(res.data.content? res.data.content :  "");
+            setLoading(true)
+            console.log("请求返回值", loading, content)
+        });
+    });
 
     // Markdown中的图表配置项
     const chartOptions = {
