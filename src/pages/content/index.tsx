@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
-import  "./index.less"
 
 import { useRequest } from 'ahooks';
-import styles from "@/pages/content/index.less";
+import "@/pages/content/index.less";
 
 
 import Prism from 'prismjs';
@@ -55,11 +54,11 @@ export default function DetailPage() {
         maxHeight: 300,
     };
     return (
-        <div className={styles.app}>
-            <div className={styles.content}>
+        <div className="app">
+            <div className="content">
                 <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
                 <h2>你读过最有力量的一段文字是什么？</h2>
-                <span className={styles.tag}><a className={styles.author}>栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
+                <span className="tag"><a className="author">栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
                 {/*<div>{content}</div>*/}
                 {loading && <Viewer
                     ref={editor_ref}
@@ -71,8 +70,8 @@ export default function DetailPage() {
                         tableMergedCellPlugin,
                     ]}
                 />}
-                <div className={styles.page_up_down}>
-                    <div className={styles.topic}>读书会 · 目录 · 12篇</div>
+                <div className="page_up_down">
+                    <div className="topic">读书会 · 目录 · 12篇</div>
                     <div className="album_read_bd">
                         <span className="album_read_nav_item album_read_nav_prev">
                             <Link to="/">
