@@ -2,11 +2,24 @@ import { Link } from 'umi';
 import { Tabs, TabPane, Avatar,Dropdown, Tag} from '@douyinfe/semi-ui';
 import { IconCopy,IconComment,IconLikeHeart,IconWeibo } from '@douyinfe/semi-icons';
 import { Image,Button, List, Skeleton,Timeline } from 'antd';
-import { FlagOutlined,DribbbleOutlined,BulbOutlined,CommentOutlined,HeartOutlined,ShareAltOutlined,WeiboOutlined,WechatOutlined,LinkOutlined } from '@ant-design/icons';
+import {
+    FlagOutlined,
+    DribbbleOutlined,
+    BulbOutlined,
+    CommentOutlined,
+    HeartOutlined,
+    ShareAltOutlined,
+    WeiboOutlined,
+    WechatOutlined,
+    LinkOutlined,
+    StarOutlined
+} from '@ant-design/icons';
 import styles from "@/pages/home/index.less";
 import React, { useEffect, useState } from 'react';
 import Comments from "@/components/Comments";
+import archArticles from "@/models/arch.tsx"
 
+import styles1 from "@/components/Comments/index.less";
 
 export default  function HomePage () {
 
@@ -95,71 +108,9 @@ export default  function HomePage () {
                               <span><HeartOutlined />&nbsp;10喜欢</span>
                           </div>
                       </div>
-                      <div  className={styles.item}>
-                          <h4><Link to="/detail?title=america-history.html"> 美国人真的会把外衣、内衣、袜子和鞋子全部放在洗衣机一起洗吗？</Link></h4>
-                          <div><p>越之见： 社会切切实实就是一个草台班子。 越早洞察到这个真相，就能越早活开。 人所有的唯唯诺诺、自卑、自我否定、压抑以及失败都源于把社会和周围的人想得太强…</p></div>
-                          <div>
-                              <span><CommentOutlined />&nbsp;210条评价</span>&nbsp;&nbsp;
-                              <span><ShareAltOutlined />&nbsp;
-                                  <Dropdown
-                                      render={
-                                          <Dropdown.Menu>
-                                              <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
-                                              <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
-                                              <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
-                                          </Dropdown.Menu>
-                                      }
-                                  >
-                                    210分享
-                              </Dropdown>
-                              </span>&nbsp;&nbsp;
-                              <span><HeartOutlined />&nbsp;10喜欢</span>
-                          </div>
-                      </div>
-                      <div  className={styles.item}>
-                          <h4><Link to="/detail?title=america-history.html"> 美国人真的会把外衣、内衣、袜子和鞋子全部放在洗衣机一起洗吗？</Link></h4>
-                          <div><p>越之见： 社会切切实实就是一个草台班子。 越早洞察到这个真相，就能越早活开。 人所有的唯唯诺诺、自卑、自我否定、压抑以及失败都源于把社会和周围的人想得太强…</p></div>
-                          <div>
-                              <span><CommentOutlined />&nbsp;210条评价</span>&nbsp;&nbsp;
-                              <span><ShareAltOutlined />&nbsp;
-                                  <Dropdown
-                                      render={
-                                          <Dropdown.Menu>
-                                              <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
-                                              <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
-                                              <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
-                                          </Dropdown.Menu>
-                                      }
-                                  >
-                                    210分享
-                              </Dropdown>
-                              </span>&nbsp;&nbsp;
-                              <span><HeartOutlined />&nbsp;10喜欢</span>
-                          </div>
-                      </div>
+
                   </TabPane>
                   <TabPane tab={<span><BulbOutlined />&nbsp;思考</span>} itemKey="3">
-                      <div  className={styles.item}>
-                          <h4><Link to="/detail?title=america-history.html"> 美国人真的会把外衣、内衣、袜子和鞋子全部放在洗衣机一起洗吗？</Link></h4>
-                          <div><p>越之见： 社会切切实实就是一个草台班子。 越早洞察到这个真相，就能越早活开。 人所有的唯唯诺诺、自卑、自我否定、压抑以及失败都源于把社会和周围的人想得太强…</p></div>
-                          <div>
-                              <span><CommentOutlined />&nbsp;210条评价</span>&nbsp;&nbsp;
-                              <span><ShareAltOutlined />&nbsp;
-                                  <Dropdown
-                                      render={
-                                          <Dropdown.Menu>
-                                              <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
-                                              <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
-                                              <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
-                                          </Dropdown.Menu>
-                                      }
-                                  >
-                                    210分享
-                              </Dropdown>
-                              </span>&nbsp;&nbsp;
-                              <span><HeartOutlined />&nbsp;10喜欢</span>
-                          </div>
-                      </div>
                       <div  className={styles.item}>
                           <h4><Link to="/detail?title=america-history.html"> 美国人真的会把外衣、内衣、袜子和鞋子全部放在洗衣机一起洗吗？</Link></h4>
                           <div><p>越之见： 社会切切实实就是一个草台班子。 越早洞察到这个真相，就能越早活开。 人所有的唯唯诺诺、自卑、自我否定、压抑以及失败都源于把社会和周围的人想得太强…</p></div>

@@ -10,15 +10,16 @@ export default function Comments() {
         username: string;
         content: string;
         avatar: string;
+        like_num: number;
+        star_num: number;
     };
     const [messageApi, contextHolder] = message.useMessage();
     const { TextArea } = Input;
     const [comment, setComment] = useState("");
     const [uid, setUID] = useState(0)
     const [targetUID, setTargetUID] = useState(0)
-    const [count, setCount] = useState(3)
+    const [id, setId] = useState(3)
     const [showComment, setShowComment] = useState(false)
-    const [showReply, setShowReply] = useState(false)
     const [list, setList] = useState<DataType[]>([
         {
             id: 1,
@@ -26,6 +27,8 @@ export default function Comments() {
             username: "栗",
             content: "我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。",
             avatar: "https://picx.zhimg.com/8589ed3e65ebd6011d8f9268696688af_l.jpg?source=2c26e567",
+            like_num: 83,
+            star_num: 3
         },
         {
             id: 2,
@@ -33,11 +36,11 @@ export default function Comments() {
             username: "星",
             content: "其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。",
             avatar: "https://pic1.zhimg.com/v2-93446443e78697dbe2e4a052c5a47b12_l.jpg?source=32738c0c",
+            like_num: 22,
+            star_num: 8
         }
     ])
-    const showReplyEditor = () => {
-        setShowReply(true)
-    }
+
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
@@ -51,9 +54,9 @@ export default function Comments() {
                     {comment.content}
                 </div>
                 <div className="comments-content-container-tools">
-                    <HeartOutlined /> 83 &nbsp;
-                    <StarOutlined /> 3 &nbsp;
-                    <span><CommentOutlined /> Reply&nbsp;</span>
+                    <span><HeartOutlined /> {comment.like_num} &nbsp;</span>
+                    <span><StarOutlined /> {comment.star_num} &nbsp;</span>
+                    <span ><CommentOutlined /> Reply&nbsp;</span>
                 </div>
             </div>
         </div>
@@ -73,16 +76,18 @@ export default function Comments() {
             return
         }
 
-        setCount(count+1)
+        setId(id+1)
         const item:DataType = {
-            id: count,
+            id: id,
             uid: uid,
             username: "宝",
             content: comment,
             avatar: "https://picx.zhimg.com/v2-0b1e0cff6273b779e1c0a13f0f737cf9_l.jpg?source=2c26e567",
+            like_num: 0,
+            star_num: 0
         }
         setList([item, ...list])
-        console.log("ID", count)
+        console.log("ID", id)
         setComment("")
     }
 
@@ -90,6 +95,9 @@ export default function Comments() {
         setShowComment(true)
         console.log("show", showComment)
     }
+
+
+    // 1.登陆功能  2.查询登陆用户的信息 3.提交评价内容 4.获取评价内容
 
     return (
         <div className="comments" >
