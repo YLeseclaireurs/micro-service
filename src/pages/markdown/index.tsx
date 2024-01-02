@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
-import  "./index.less"
+import  "@/pages/markdown/index.less";
 import { Button,Input,Select } from 'antd';
 
 import Prism from 'prismjs';
@@ -19,7 +19,6 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 
 import { Col, Row } from 'antd';
 
-import styles from "@/pages/markdown/index.less";
 
 import {UploadImage} from "@/services/tools/upload";
 
