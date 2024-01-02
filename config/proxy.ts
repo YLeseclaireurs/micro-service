@@ -13,6 +13,10 @@ export default {
             target: 'http://127.0.0.1:8787',
             changeOrigin: true,
         },
+        '/api/v1.0/tools/upload-image': {
+            target: 'http://127.0.0.1:8787',
+            changeOrigin: true,
+        },
         '/api/': {
             // 要代理的地址
             target: 'https://preview.pro.ant.design',
