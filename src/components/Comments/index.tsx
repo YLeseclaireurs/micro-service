@@ -41,6 +41,14 @@ export default function Comments() {
         }
     ])
 
+    const  doReply = (comment: DataType) => {
+        setShowComment(true)
+
+        setTargetUID(comment.uid)
+
+        console.log("评价", comment)
+    }
+
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
@@ -51,12 +59,10 @@ export default function Comments() {
                     <span className="username">{comment.username}</span> <span> 1小时前 </span>
                 </div>
                 <div className="comments-content-container-desc">
-                    {comment.content}
+                    {comment.content}&nbsp;&nbsp;
                 </div>
                 <div className="comments-content-container-tools">
-                    <span><HeartOutlined /> {comment.like_num} &nbsp;</span>
-                    <span><StarOutlined /> {comment.star_num} &nbsp;</span>
-                    <span ><CommentOutlined /> Reply&nbsp;</span>
+                    <span onClick={() => doReply(comment)}><CommentOutlined /> 回复&nbsp;</span>
                 </div>
             </div>
         </div>
