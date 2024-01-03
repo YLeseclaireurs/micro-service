@@ -3,7 +3,8 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import  "@/pages/markdown/index.less";
 import { Button,Input,Select } from 'antd';
-import { Tabs, TabPane, Avatar,Dropdown, Tag} from '@douyinfe/semi-ui';
+import {Avatar} from '@douyinfe/semi-ui';
+import {FormOutlined} from '@ant-design/icons';
 
 import Prism from 'prismjs';
 import codeSyntaxHighlightPlugin from '@toast-ui/editor-plugin-code-syntax-highlight';
@@ -82,8 +83,8 @@ export default function App() {
             />*/}
             <div style={{marginLeft:20, marginTop:20, marginBottom:20}}>
                 <Avatar style={{ width:45, height:45, color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -5 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>&nbsp;&nbsp;
-                <span style={{ "color": "#999"}}>若能虚己以游世，其孰能害之</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{fontWeight: 300}}>标签：</span>
+                <span style={{ "color": "#999"}}>若能虚己以游世，其孰能害之，行到水穷处，坐看云起时。</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标签：</span>
                 <Select
                     defaultValue="架构"
                     style={{"width": 100}}
@@ -93,9 +94,9 @@ export default function App() {
                         { value: 'insight', label: '思考' },
                     ]}
                 />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{fontWeight: 300}}>话题：</span><Input style={{"width": 100}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{fontWeight: 300}}>标题：</span><Input style={{"width":300}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <Button type="primary" danger style={{ display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={() => {
+                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>话题：</span><Input style={{"width": 100}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标题：</span><Input style={{"width":300}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={() => {
                     const editor_instance = editor_ref.current?.getInstance();
                     console.log("提交", editor_instance?.getMarkdown())
                 }}>发布</Button>
