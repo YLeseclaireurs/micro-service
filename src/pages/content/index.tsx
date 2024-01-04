@@ -21,7 +21,7 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import { Link } from 'umi';
 
 
-import {GetArticleDetail} from "@/services/article";
+import {GetArticleDetail} from "@/services/articles/article";
 
 import {initData, data} from "@/pages/content/data";
 import {QRCode, Affix, Button, List} from 'antd';
@@ -60,7 +60,6 @@ export default function DetailPage() {
                 <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
                 <h2>你读过最有力量的一段文字是什么？</h2>
                 <span className="tag"><a className="author">栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
-                {/*<div>{content}</div>*/}
                 {loading && <Viewer
                     ref={editor_ref}
                     initialValue={content}
