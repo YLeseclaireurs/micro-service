@@ -1,7 +1,7 @@
 import { Link } from 'umi';
 import { Tabs, TabPane, Avatar,Dropdown, Tag} from '@douyinfe/semi-ui';
 import { IconCopy,IconComment,IconLikeHeart,IconWeibo } from '@douyinfe/semi-icons';
-import { Image,Button, List, Skeleton,Timeline } from 'antd';
+import { Image,Button, List, Skeleton,Timeline, QRCode } from 'antd';
 import {
     FlagOutlined,
     DribbbleOutlined,
@@ -48,6 +48,14 @@ export default  function HomePage () {
                                 <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
                                 <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
                                 <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
+                                <div style={{marginLeft:18,marginTop:5, marginBottom:10}}>
+                                    <QRCode
+                                        size={90}
+                                        iconSize={80/4}
+                                        value="https://ant.design/"
+                                        icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                                    />
+                                </div>
                             </Dropdown.Menu>
                         }
                     >
@@ -72,6 +80,14 @@ export default  function HomePage () {
                                     <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
                                     <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
                                     <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
+                                    <div style={{marginLeft:18,marginTop:5, marginBottom:10}}>
+                                        <QRCode
+                                            size={90}
+                                            iconSize={80/4}
+                                            value="https://ant.design/"
+                                            icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                                        />
+                                    </div>
                                 </Dropdown.Menu>
                             }
                         >
