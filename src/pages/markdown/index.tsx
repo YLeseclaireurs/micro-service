@@ -22,6 +22,7 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 
 import { Col, Row } from 'antd';
 
+import Content from "@/pages/content";
 
 import {UploadImage} from "@/services/tools/upload";
 
@@ -97,7 +98,7 @@ export default function App() {
                 />&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#999", fontWeight: 300, fontSize:15}}>话题：</span><Input style={{"width": 100}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标题：</span><Input style={{"width":300}} placeholder="" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={() => {
                     const editor_instance = editor_ref.current?.getInstance();
                     console.log("提交", editor_instance?.getMarkdown())
