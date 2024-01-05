@@ -2,6 +2,8 @@ import { message, Flex, Input, Avatar,Button } from 'antd';
 import  "./index.less";
 import { CommentOutlined,StarOutlined,HeartOutlined } from '@ant-design/icons';
 import React, {useState} from "react";
+import {CommitArticle} from "@/services/articles/article";
+import {CommitComment} from "@/services/comments/comment";
 
 export default function Comments() {
     type DataType = {
@@ -93,8 +95,15 @@ export default function Comments() {
             star_num: 0
         }
         setList([item, ...list])
-        console.log("ID", id)
+        console.log("comment", comment)
         setComment("")
+
+
+        // 评价提交
+        const params = {}
+        CommitComment(params).then((res) => {
+            console.log("请求返回值", res)
+        })
     }
 
     const showCommentEditor = () => {

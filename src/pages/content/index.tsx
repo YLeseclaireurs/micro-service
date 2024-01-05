@@ -55,58 +55,61 @@ export default function DetailPage() {
         maxHeight: 300,
     };
     return (
-        <div className="app">
-            <div className="content">
-                <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
-                <h2>你读过最有力量的一段文字是什么？</h2>
-                <span className="tag"><a className="author">栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
-                {loading && <Viewer
-                    ref={editor_ref}
-                    initialValue={content}
-                    plugins={[
-                        [codeSyntaxHighlightPlugin, { highlighter: Prism }],
-                        umlPlugin,
-                        [chartPlugin, chartOptions],
-                        tableMergedCellPlugin,
-                    ]}
-                />}
-                <div className="page_up_down">
-                    <div className="topic">读书会 · 目录 · 12篇</div>
-                    <div className="album_read_bd">
-                        <span className="album_read_nav_item album_read_nav_prev">
-                            <Link to="/">
-                                <span  className="album_read_nav_inner">
-                                    <span className="album_read_nav_btn">《上一篇</span>
-                                    <span className="album_read_nav_btn">假期准备读的2本书</span>
-                                </span>
-                            </Link>
-                        </span>
-                        <span className="album_read_nav_item album_read_nav_next">
-                            <Link to="/">
-                                <span className="album_read_nav_inner">
-                                    <span className="album_read_nav_btn">下一篇》</span>
-                                    <span className="album_read_nav_btn">11月读的2本书</span>
-                                </span>
-                            </Link>
-                        </span>
+        <>
+            <div className="app">
+                <div className="content">
+                    <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
+                    <h2>你读过最有力量的一段文字是什么？</h2>
+                    <span className="tag"><a className="author">栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
+                    {loading && <Viewer
+                        ref={editor_ref}
+                        initialValue={content}
+                        plugins={[
+                            [codeSyntaxHighlightPlugin, { highlighter: Prism }],
+                            umlPlugin,
+                            [chartPlugin, chartOptions],
+                            tableMergedCellPlugin,
+                        ]}
+                    />}
+                    <div className="page_up_down">
+                        <div className="topic">读书会 · 目录 · 12篇</div>
+                        <div className="album_read_bd">
+                            <span className="album_read_nav_item album_read_nav_prev">
+                                <Link to="/">
+                                    <span  className="album_read_nav_inner">
+                                        <span className="album_read_nav_btn">《上一篇</span>
+                                        <span className="album_read_nav_btn">假期准备读的2本书</span>
+                                    </span>
+                                </Link>
+                            </span>
+                            <span className="album_read_nav_item album_read_nav_next">
+                                <Link to="/">
+                                    <span className="album_read_nav_inner">
+                                        <span className="album_read_nav_btn">下一篇》</span>
+                                        <span className="album_read_nav_btn">11月读的2本书</span>
+                                    </span>
+                                </Link>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="some_likes">
+                        <div className="function_hd js_related_title">喜欢此内容的人还喜欢</div>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        title={<a href={item.href}>{item.title}</a>}
+                                        description={<span>{item.desc}</span>}
+                                    />
+                                </List.Item>
+                            )}
+                        />
                     </div>
                 </div>
-                <div className="some_likes">
-                    <div className="function_hd js_related_title">喜欢此内容的人还喜欢</div>
-                    <List
-                        itemLayout="horizontal"
-                        dataSource={data}
-                        renderItem={(item, index) => (
-                            <List.Item>
-                                <List.Item.Meta
-                                    title={<a href={item.href}>{item.title}</a>}
-                                    description={<span>{item.desc}</span>}
-                                />
-                            </List.Item>
-                        )}
-                    />
-                </div>
             </div>
-        </div>
+            <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
+        </>
     );
 }
