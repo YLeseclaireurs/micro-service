@@ -1,7 +1,7 @@
 import { Link } from 'umi';
 import { Tabs, TabPane, Avatar,Dropdown, Tag} from '@douyinfe/semi-ui';
 import { IconCopy,IconComment,IconLikeHeart,IconWeibo } from '@douyinfe/semi-icons';
-import { Image,Button, List, Skeleton,Timeline, QRCode } from 'antd';
+import { Image,Button, List, Skeleton,Timeline, QRCode,Divider } from 'antd';
 import {
     FlagOutlined,
     DribbbleOutlined,
@@ -99,66 +99,69 @@ export default  function HomePage () {
     );
 
     return (
-      <div className="app">
-          <div className="content">
-              <div className="head">
-                  <div className="box">
-                      <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -9 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>
-                      <span className="sign">&nbsp;&nbsp;<span className="name">栗</span> · 若能虚己以游世，其孰能害之</span><br/>
-                  </div>
-              </div>
-              <Tabs>
-                  <TabPane  tab={<span><FlagOutlined />&nbsp;首页</span>} itemKey="1">
-                      {/*<div className={styles.preview}>
-                          <Image.PreviewGroup
-                              items={[
-                                  'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
-                                  'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
-                              ]}
-                          >
-                              <Image  src="https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp"/>
-                          </Image.PreviewGroup>
-                      </div>*/}
-                      <div className="home-content">
-                          <br/>
-                          <h3>你读过最有力量的一段文字是什么？</h3>
-                          <p>
-                              11月比较忙，重读了之前读过的2本好书： 《思考快与慢》 《错误的行为》 画外音：坚持一件事很难，但读书，真的有用。
-                          </p>
-                              我们累积记忆，让大脑给我们形成一套习惯的认知模式，冠上一些常规的印象。但是，我们这些由直觉与记忆产生的想法，不仅草率，而且会产生很多偏见，甚至是错误。
-                          <p>
-                              更糟糕的是，我们常常察觉不到这种偏见与错误。以为做出的是理智决定，其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。
-                          </p>
-                          <p>
-                              原来在我们的大脑里，有两个系统，作者将它称为系统1和系统2。
-                          </p>
-                          <p>
-                              但是慢思考实在是太累了，太消耗能量，太反人性了，快思考就成了我们现实生活中的主宰。这种直觉式的思考会经常让我们在判断与决策中产生偏见，错过了更好的选择。 改变一个人对人性的看法很难，改变一个人对自身阴暗面的看法就更难了。
-                          </p>
-                          <p>
-                              我们能相互交流，因为我们关于世界的知识和对文字的运用水平都相当。
-                          </p>
-                          <p>
-                              我们大脑有说不清楚的局限:我们对自己认为熟知的事物确信不疑，我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。
-                          </p>
-                          <p>
-                              书里不仅详细阐述了这种思考模式给我们带来的负面影响，同时通过经典有趣的行为实验来引导我们认识习惯性思考模式的弊端。
-                          </p>
-                          <p>
-                              书告诉我们在什么情况下可以相信自己的直觉，什么时候又不能相信。并有效实用的办法能帮助我们做出理性的决策，避免那些常常使我们陷入麻烦的思维失误。
-                          </p>
+        <>
+          <div className="app">
+              <div className="content">
+                  <div className="head">
+                      <div className="box">
+                          <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -9 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>
+                          <span className="sign">&nbsp;&nbsp;<span className="name">栗</span> · 若能虚己以游世，其孰能害之</span><br/>
                       </div>
-                      <Comments/>
-                  </TabPane>
-                  <TabPane tab={<span><DribbbleOutlined />&nbsp;架构</span>} itemKey="2">
-                      {ArchArticlesComponents}
-                  </TabPane>
-                  <TabPane tab={<span><BulbOutlined />&nbsp;思考</span>} itemKey="3">
-                      {InsightArticlesComponents}
-                  </TabPane>
-              </Tabs>
+                  </div>
+                  <Tabs>
+                      <TabPane  tab={<span><FlagOutlined />&nbsp;首页</span>} itemKey="1">
+                          {/*<div className={styles.preview}>
+                              <Image.PreviewGroup
+                                  items={[
+                                      'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
+                                      'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
+                                  ]}
+                              >
+                                  <Image  src="https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp"/>
+                              </Image.PreviewGroup>
+                          </div>*/}
+                          <div className="home-content">
+                              <br/>
+                              <h3>你读过最有力量的一段文字是什么？</h3>
+                              <p>
+                                  11月比较忙，重读了之前读过的2本好书： 《思考快与慢》 《错误的行为》 画外音：坚持一件事很难，但读书，真的有用。
+                              </p>
+                                  我们累积记忆，让大脑给我们形成一套习惯的认知模式，冠上一些常规的印象。但是，我们这些由直觉与记忆产生的想法，不仅草率，而且会产生很多偏见，甚至是错误。
+                              <p>
+                                  更糟糕的是，我们常常察觉不到这种偏见与错误。以为做出的是理智决定，其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。
+                              </p>
+                              <p>
+                                  原来在我们的大脑里，有两个系统，作者将它称为系统1和系统2。
+                              </p>
+                              <p>
+                                  但是慢思考实在是太累了，太消耗能量，太反人性了，快思考就成了我们现实生活中的主宰。这种直觉式的思考会经常让我们在判断与决策中产生偏见，错过了更好的选择。 改变一个人对人性的看法很难，改变一个人对自身阴暗面的看法就更难了。
+                              </p>
+                              <p>
+                                  我们能相互交流，因为我们关于世界的知识和对文字的运用水平都相当。
+                              </p>
+                              <p>
+                                  我们大脑有说不清楚的局限:我们对自己认为熟知的事物确信不疑，我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。
+                              </p>
+                              <p>
+                                  书里不仅详细阐述了这种思考模式给我们带来的负面影响，同时通过经典有趣的行为实验来引导我们认识习惯性思考模式的弊端。
+                              </p>
+                              <p>
+                                  书告诉我们在什么情况下可以相信自己的直觉，什么时候又不能相信。并有效实用的办法能帮助我们做出理性的决策，避免那些常常使我们陷入麻烦的思维失误。
+                              </p>
+                          </div>
+                          <Comments/>
+                      </TabPane>
+                      <TabPane tab={<span><DribbbleOutlined />&nbsp;架构</span>} itemKey="2">
+                          {ArchArticlesComponents}
+                      </TabPane>
+                      <TabPane tab={<span><BulbOutlined />&nbsp;思考</span>} itemKey="3">
+                          {InsightArticlesComponents}
+                      </TabPane>
+                  </Tabs>
+              </div>
           </div>
-      </div>
+          <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
+      </>
   );
 };
 

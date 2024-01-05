@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import  "@/pages/markdown/index.less";
@@ -22,15 +22,32 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import {UploadImage} from "@/services/tools/upload";
 import {initData} from "@/pages/markdown/data";
 
+import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
+
 export default function App() {
     const [image, setImage] = useState("");
     const [content, setContent] = useState('')
     const [arch, setArch] = useState("arch")
     const [topic, setTopic] = useState("")
+    const [url, setUrl] = useState("")
     const [title, setTitle] = useState("")
     const [loading, setLoading] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
     const editor_ref = useRef<Editor>(null);
+
+
+
+    /*useEffect(() => {
+        document.title = '文章发布';
+        const params = {
+            id:1
+        };
+        content == "" && GetArticleDetail(params).then((res) => {
+            setContent(res.data.content? res.data.content :  "");
+            setLoading(true)
+            console.log("请求返回值", loading, content)
+        });
+    });*/
 
 
     const height = (window.innerHeight - 83).toString() + "px"
@@ -44,11 +61,14 @@ export default function App() {
         setTopic(value.target.value)
         console.log("话题", topic)
     }
+    const handleURLChange = (value:any) => {
+        setUrl(value.target.value)
+        console.log("URL", topic)
+    }
     const handleTitleChange = (value:any) => {
         setTitle(value.target.value)
         console.log("标题", title)
     }
-
     const handleChange = () => {
         const editor_instance = editor_ref.current?.getInstance()
         setContent(editor_instance?.getMarkdown())
@@ -65,6 +85,9 @@ export default function App() {
         if (topic == "") {
             return messageApi.open({type: 'warning', content: "话题不能为空"})
         }
+        if (url == "") {
+            return messageApi.open({type: 'warning', content: "短地址不能为空"})
+        }
         if (title == "") {
             return messageApi.open({type: 'warning', content: "标题不能为空"})
         }
@@ -73,12 +96,16 @@ export default function App() {
             "content": content,
             "arch": arch,
             "topic": topic,
+            "url": url,
             "title": title,
         }
 
         console.log("params", params)
 
-        // 发布请求，数据提交接口
+        // TODO 发布请求，数据提交接口
+        CommitArticle(params).then((res) => {
+            console.log("请求返回值", res)
+        })
 
     }
 
@@ -119,6 +146,7 @@ export default function App() {
                     ]}
                 />&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#999", fontWeight: 300, fontSize:15}}>话题：</span><Input style={{"width": 100}} placeholder="" onChange={handleTopicChange} />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>URL：</span><Input style={{"width": 100}} placeholder="" onChange={handleURLChange} />&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标题：</span><Input style={{"width":300}} placeholder="" onChange={handleTitleChange} />&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>

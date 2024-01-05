@@ -30,7 +30,7 @@ import { BackTop } from '@douyinfe/semi-ui';
 import { IconArrowUp } from '@douyinfe/semi-icons';
 
 export default function DetailPage() {
-// 页面数据获取
+    // 页面数据获取
     const params = {
         id:1
     };
