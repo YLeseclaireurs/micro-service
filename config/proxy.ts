@@ -9,7 +9,7 @@
 export default {
     dev: {
         // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
-        '/api/v1.0/article/retrieve-article-detail': {
+        '/api/v1.0/': {
             target: 'http://127.0.0.1:8787',
             changeOrigin: true,
         },

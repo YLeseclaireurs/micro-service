@@ -27,7 +27,7 @@ import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
 export default function App() {
     const [image, setImage] = useState("");
     const [content, setContent] = useState('')
-    const [arch, setArch] = useState("arch")
+    const [category, setCategory] = useState("arch")
     const [topic, setTopic] = useState("")
     const [url, setUrl] = useState("")
     const [title, setTitle] = useState("")
@@ -53,9 +53,9 @@ export default function App() {
     const height = (window.innerHeight - 83).toString() + "px"
     console.log("高度", height)
 
-    const handleArchChange = (value:any) => {
-        setArch(value)
-        console.log("标签", arch)
+    const handleCategoryChange = (value:any) => {
+        setCategory(value)
+        console.log("标签", category)
     }
     const handleTopicChange = (value:any) => {
         setTopic(value.target.value)
@@ -79,7 +79,7 @@ export default function App() {
         if (content == "") {
             return messageApi.open({type: 'warning', content: "文章内容不能为空"})
         }
-        if (arch == "") {
+        if (category == "") {
             return messageApi.open({type: 'warning', content: "标签不能为空"})
         }
         if (topic == "") {
@@ -94,9 +94,9 @@ export default function App() {
 
         const params = {
             "content": content,
-            "arch": arch,
-            "topic": topic,
-            "url": url,
+            "category": category,
+            "topics": topic,
+            "url_token": url,
             "title": title,
         }
 
@@ -106,7 +106,6 @@ export default function App() {
         CommitArticle(params).then((res) => {
             console.log("请求返回值", res)
         })
-
     }
 
     const style = {
@@ -139,7 +138,7 @@ export default function App() {
                 <Select
                     defaultValue="架构"
                     style={{"width": 100}}
-                    onChange={handleArchChange}
+                    onChange={handleCategoryChange}
                     options={[
                         { value: 'arch', label: '架构' },
                         { value: 'insight', label: '思考' },

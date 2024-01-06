@@ -23,7 +23,7 @@ export async function GetArticleList(body: API.ArticleListParams, options?: { [k
 }
 
 export async function CommitArticle(body: API.CommitArticleParams, options?: { [key: string]: any }) {
-    return request<API.CommitArticleResp>('/api/v1.0/article/commit-article', {
+    return request<API.CommitArticleResp>('/api/v1.0/article/publish-article', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -3,10 +3,16 @@ declare namespace API {
     // 文章实体
     type Article = {
         id?: number;
+        title?: string;
+        url?:string;
         username?: string;
         city?: string;
-        topic?: string;
+        category?:string;
+        topics?: string;
+        brief?:string;
         content?: string;
+        comment_nums?:number;
+        share_nums?:number;
         updated_at?: string;
         created_at?: string;
     };
@@ -25,7 +31,7 @@ declare namespace API {
 
     // 文章列表
     type ArticleListParams = {
-        arch?: string;
+        category?: string;
         page?: number;
         size?: number;
     };
@@ -38,18 +44,15 @@ declare namespace API {
 
     // 文章内容发布接口参数
     type CommitArticleParams = {
-        content?:string;
-        arch?: string;
-        topic?: string;
         title?: string;
-    }
-    type CommitArticleData = {
-        id?: string;
-        title?: string;
+        url_token?: string;
+        category?:string;
+        topics?: string;
+        content?: string;
     }
     type CommitArticleResp = {
         code?: number;
         message?: string;
-        data?: CommitArticleData;
+        data?: Article;
     }
 }
