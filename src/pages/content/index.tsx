@@ -107,9 +107,9 @@ export default function DetailPage() {
                             )}
                         />
                     </div>
+                    <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
                 </div>
             </div>
-            <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
         </>
     );
 }
