@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 
-import { useRequest } from 'ahooks';
+import "@/styles/global.less"
 import "@/pages/content/index.less";
 
 
@@ -21,29 +21,37 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import { Link } from 'umi';
 
 
-import {GetArticleDetail} from "@/services/articles/article";
+import {GetArticleDetail, GetArticleList} from "@/services/articles/article";
 
-import {initData, data} from "@/pages/content/data";
-import {QRCode, Affix, Button, List} from 'antd';
+import { data} from "@/pages/content/data";
+import {List} from 'antd';
 
-import { BackTop } from '@douyinfe/semi-ui';
+import {BackTop} from '@douyinfe/semi-ui';
 import { IconArrowUp } from '@douyinfe/semi-icons';
+import Comments from "@/components/Comments";
+import Header from "@/components/Header";
+
 
 export default function DetailPage() {
     // 页面数据获取
     const params = {
         id:1
     };
-    const [content, setContent] = useState("");
+    const [article, setArticle] = useState<API.Article>({});
     const [loading, setLoading] = useState(false);
     const editor_ref = useRef<Editor>(null);
 
     useEffect(() => {
         document.title = '你读过最有力量的一段文字是什么？';
-        content == "" && GetArticleDetail(params).then((res) => {
-            setContent(res.data.content? res.data.content :  "");
+
+        const params = {
+            id:1
+        }
+        Object.keys(article).length === 0 && GetArticleDetail(params).then((res) => {
+            setArticle(res.data? res.data: {})
             setLoading(true)
-            console.log("请求返回值", loading, content)
+            document.title = article.title ? article.title: "111"
+            console.log("请求返回值",  article)
         });
     });
 
@@ -54,16 +62,19 @@ export default function DetailPage() {
         minHeight: 100,
         maxHeight: 300,
     };
+
+
     return (
         <>
             <div className="app">
+                <Header />
                 <div className="content">
                     <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
-                    <h2>你读过最有力量的一段文字是什么？</h2>
+                    <h2>{article.title}</h2>
                     <span className="tag"><a className="author">栗·YLeseclaireurs</a> <span > 2023-12-05 19:34 发表于北京 </span></span>
                     {loading && <Viewer
                         ref={editor_ref}
-                        initialValue={content}
+                        initialValue={article.content}
                         plugins={[
                             [codeSyntaxHighlightPlugin, { highlighter: Prism }],
                             umlPlugin,
@@ -71,6 +82,7 @@ export default function DetailPage() {
                             tableMergedCellPlugin,
                         ]}
                     />}
+                    <Comments/>
                     <div className="page_up_down">
                         <div className="topic">读书会 · 目录 · 12篇</div>
                         <div className="album_read_bd">

@@ -1,35 +1,28 @@
 import { Link } from 'umi';
-import { Tabs, TabPane, Avatar,Dropdown, Tag} from '@douyinfe/semi-ui';
-import { IconCopy,IconComment,IconLikeHeart,IconWeibo } from '@douyinfe/semi-icons';
-import { Image,Button, List, Skeleton,Timeline, QRCode,Divider } from 'antd';
-import {
-    FlagOutlined,
-    DribbbleOutlined,
-    BulbOutlined,
-    CommentOutlined,
-    HeartOutlined,
-    ShareAltOutlined,
-    WeiboOutlined,
-    WechatOutlined,
-    LinkOutlined,
-    StarOutlined
-} from '@ant-design/icons';
+import { List, Layout } from 'antd';
+
+import "@/styles/global.less"
 import "@/pages/home/index.less";
 import React, {useEffect, useRef, useState} from 'react';
 import Comments from "@/components/Comments";
-import {ArchArticles} from "@/pages/home/arch"
-import {InsightArticles} from "@/pages/home/insight";
-import {GetCommentList} from "@/services/comments/comment";
 import {GetArticleList} from "@/services/articles/article";
 import {Editor, Viewer} from "@toast-ui/react-editor";
-import codeSyntaxHighlightPlugin from "@toast-ui/editor-plugin-code-syntax-highlight";
+
 import Prism from "prismjs";
 import umlPlugin from "@toast-ui/editor-plugin-uml";
 import chartPlugin from "@toast-ui/editor-plugin-chart";
 import tableMergedCellPlugin from "@toast-ui/editor-plugin-table-merged-cell";
+import codeSyntaxHighlightPlugin from "@toast-ui/editor-plugin-code-syntax-highlight";
 
+import {data} from "@/pages/content/data";
+import Header from "@/components/Header";
 
 export default  function HomePage () {
+    const items = new Array(3).fill(null).map((_, index) => ({
+        key: String(index + 1),
+        label: `nav ${index + 1}`,
+    }));
+
 
     const style = {
         backgroundColor: 'var(--semi-color-overlay-bg)',
@@ -92,120 +85,65 @@ export default  function HomePage () {
         minHeight: 100,
         maxHeight: 300,
     };
-    const ArchArticlesComponents = archList.map(arch =>
-        <div key={arch.id}  className="item">
-            <h4><Link to="/detail"> {arch.title} </Link></h4>
-            <div><p>{arch.brief}<Link to="/detail"> 阅读全文</Link></p></div>
-            <div className="inter-box">
-                <span>2023年12月31日 11点39分</span>&nbsp;&nbsp;
-                <span><Link to="/detail?title=america-history.html"><CommentOutlined />&nbsp;{arch.comment_nums}条评价</Link></span>&nbsp;&nbsp;
-                <span><ShareAltOutlined />&nbsp;
-                    <Dropdown
-                        render={
-                            <Dropdown.Menu>
-                                <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
-                                <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
-                                <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
-                                <div style={{marginLeft:18,marginTop:5, marginBottom:10}}>
-                                    <QRCode
-                                        size={90}
-                                        iconSize={80/4}
-                                        value="https://ant.design/"
-                                        icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-                                    />
-                                </div>
-                            </Dropdown.Menu>
-                        }
-                    >
-                    {arch.share_nums}分享
-                    </Dropdown>
-                </span>
+
+    return (
+        <div className="app">
+            <Header />
+            <div className="content" >
+                <div className="home-content">
+                    <h2>{article.title}</h2>
+                    {loading && <Viewer
+                        ref={editor_ref}
+                        initialValue={article.content}
+                        plugins={[
+                            [codeSyntaxHighlightPlugin, { highlighter: Prism }],
+                            umlPlugin,
+                            [chartPlugin, chartOptions],
+                            tableMergedCellPlugin,
+                        ]}
+                    />}
+                </div>
+                <Comments/>
+                <div className="page_up_down">
+                    <div className="topic">读书会 · 目录 · 12篇</div>
+                    <div className="album_read_bd">
+                            <span className="album_read_nav_item album_read_nav_prev">
+                                <Link to="/">
+                                    <span  className="album_read_nav_inner">
+                                        <span className="album_read_nav_btn">《上一篇</span>
+                                        <span className="album_read_nav_btn">假期准备读的2本书</span>
+                                    </span>
+                                </Link>
+                            </span>
+                        <span className="album_read_nav_item album_read_nav_next">
+                                <Link to="/">
+                                    <span className="album_read_nav_inner">
+                                        <span className="album_read_nav_btn">下一篇》</span>
+                                        <span className="album_read_nav_btn">11月读的2本书</span>
+                                    </span>
+                                </Link>
+                            </span>
+                    </div>
+                </div>
+                <div className="some_likes">
+                    <div className="function_hd js_related_title">喜欢此内容的人还喜欢</div>
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={data}
+                        renderItem={(item, index) => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={<a href={item.href}>{item.title}</a>}
+                                    description={<span>{item.desc}</span>}
+                                />
+                            </List.Item>
+                        )}
+                    />
+                </div>
+                <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
             </div>
         </div>
     );
-
-    const InsightArticlesComponents = insightList.map(insight=>
-            <div key={insight.id}  className="item">
-                <h4><Link to="/detail?title=america-history.html"> {insight.title} </Link></h4>
-                <div><p>{insight.brief}阅读全文</p></div>
-                <div>
-                    <span>2023年12月31日 11点39分</span>&nbsp;&nbsp;
-                    <span><CommentOutlined />&nbsp;{insight.comment_nums}条评价</span>&nbsp;&nbsp;
-                    <span><ShareAltOutlined />&nbsp;
-                        <Dropdown
-                            render={
-                                <Dropdown.Menu>
-                                    <Dropdown.Item><LinkOutlined />&nbsp;复制链接</Dropdown.Item>
-                                    <Dropdown.Item><WeiboOutlined />&nbsp;新浪微博</Dropdown.Item>
-                                    <Dropdown.Item><WechatOutlined />&nbsp;微信扫一扫</Dropdown.Item>
-                                    <div style={{marginLeft:18,marginTop:5, marginBottom:10}}>
-                                        <QRCode
-                                            size={90}
-                                            iconSize={80/4}
-                                            value="https://ant.design/"
-                                            icon="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-                                        />
-                                    </div>
-                                </Dropdown.Menu>
-                            }
-                        >
-                        {insight.share_nums}分享
-                        </Dropdown>
-                        </span>
-                </div>
-            </div>
-    );
-
-    return (
-        <>
-          <div className="app">
-              <div className="content">
-                  <div className="head">
-                      <div className="box">
-                          <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -9 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>
-                          <span className="sign">&nbsp;&nbsp;<span className="name">栗</span> · 若能虚己以游世，其孰能害之</span><br/>
-                      </div>
-                  </div>
-                  <Tabs>
-                      <TabPane  tab={<span><FlagOutlined />&nbsp;首页</span>} itemKey="1">
-                          {/*<div className={styles.preview}>
-                              <Image.PreviewGroup
-                                  items={[
-                                      'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
-                                      'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
-                                  ]}
-                              >
-                                  <Image  src="https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp"/>
-                              </Image.PreviewGroup>
-                          </div>*/}
-                          <div className="home-content">
-                              <br/>
-                              <h3>你读过最有力量的一段文字是什么？</h3>
-                              {loading && <Viewer
-                                  ref={editor_ref}
-                                  initialValue={article.content}
-                                  plugins={[
-                                      [codeSyntaxHighlightPlugin, { highlighter: Prism }],
-                                      umlPlugin,
-                                      [chartPlugin, chartOptions],
-                                      tableMergedCellPlugin,
-                                  ]}
-                              />}
-                          </div>
-                          <Comments/>
-                      </TabPane>
-                      <TabPane tab={<span><DribbbleOutlined />&nbsp;架构</span>} itemKey="2">
-                          {ArchArticlesComponents}
-                      </TabPane>
-                      <TabPane tab={<span><BulbOutlined />&nbsp;思考</span>} itemKey="3">
-                          {InsightArticlesComponents}
-                      </TabPane>
-                  </Tabs>
-                  <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>
-              </div>
-          </div>
-      </>
-  );
 };
 
 
