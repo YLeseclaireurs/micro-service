@@ -3,8 +3,6 @@ declare namespace API {
     type Comment = {
         id?: number;
         biz_id?: number;
-        uid?: number;
-        target_uid?: number;
         user?: User;
         target_user?: User;
         content?: string;
@@ -13,7 +11,7 @@ declare namespace API {
     };
 
     type User = {
-        id?: number;
+        uid?: number;
         username?: string;
         avatar?: string;
     }
@@ -34,7 +32,7 @@ declare namespace API {
         biz_id?: number;
         uid?:number;
         target_uid?: number;
-        comment?: string;
+        content?: string;
     }
     type CommitCommentResp = {
         code?: number;

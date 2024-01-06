@@ -1,9 +1,9 @@
 import { message, Flex, Input, Avatar,Button } from 'antd';
 import  "./index.less";
 import { CommentOutlined,StarOutlined,HeartOutlined } from '@ant-design/icons';
-import React, {useState} from "react";
-import {CommitArticle} from "@/services/articles/article";
-import {CommitComment} from "@/services/comments/comment";
+import React, {useEffect, useState} from "react";
+import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
+import {CommitComment, GetCommentList} from "@/services/comments/comment";
 
 export default function Comments() {
     type DataType = {
@@ -22,31 +22,29 @@ export default function Comments() {
     const [targetUID, setTargetUID] = useState(0)
     const [id, setId] = useState(3)
     const [showComment, setShowComment] = useState(false)
-    const [list, setList] = useState<DataType[]>([
-        {
-            id: 1,
-            uid: 1,
-            username: "栗",
-            content: "我们显然无法了解自己的无知程度，无法确切了解自己所生活的这个世界的不确定性。",
-            avatar: "https://picx.zhimg.com/8589ed3e65ebd6011d8f9268696688af_l.jpg?source=2c26e567",
-            like_num: 83,
-            star_num: 3
-        },
-        {
-            id: 2,
-            uid: 2,
-            username: "星",
-            content: "其实是直觉引导的行为。以为是毋庸置疑的真理，其实是记忆累加变成的习惯。",
-            avatar: "https://pic1.zhimg.com/v2-93446443e78697dbe2e4a052c5a47b12_l.jpg?source=32738c0c",
-            like_num: 22,
-            star_num: 8
-        }
+    const [list, setList] = useState<API.Comment[]>([
+
     ])
 
-    const  doReply = (comment: DataType) => {
+
+    useEffect(() => {
+        document.title = '你读过最有力量的一段文字是什么？';
+        const params = {
+            biz_id:1,
+            page:1,
+            size:20,
+        }
+        list.length == 0 && GetCommentList(params).then((res) => {
+            setList(res.data?res.data:[])
+            console.log("请求返回值",  list)
+        });
+    });
+
+
+    const  doReply = (comment: API.Comment) => {
         setShowComment(true)
 
-        setTargetUID(comment.uid)
+        setTargetUID(comment?.user?.uid ? comment?.user?.uid : 0)
 
         console.log("评价", comment)
     }
@@ -54,11 +52,11 @@ export default function Comments() {
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
-                <Avatar size={50}  src={comment.avatar} />
+                <Avatar size={50}  src={comment.user?.avatar} />
             </div>
             <div className="comments-content-container">
                 <div className="comments-content-container-username">
-                    <span className="username">{comment.username}</span> <span> 1小时前 </span>
+                    <span className="username">{comment.user?.username}</span> <span> 1小时前 </span>
                 </div>
                 <div className="comments-content-container-desc">
                     {comment.content}&nbsp;&nbsp;
@@ -100,10 +98,26 @@ export default function Comments() {
 
 
         // 评价提交
-        const params = {}
+        const params = {
+            biz_id: 1,
+            uid: 1,
+            target_uid: 2,
+            content: comment,
+
+        }
         CommitComment(params).then((res) => {
             console.log("请求返回值", res)
-        })
+            messageApi.open({
+                type: 'success',
+                content: "评价发布成功",
+            })
+        }).catch(function(error) {
+            console.log(error);
+            messageApi.open({
+                type: 'warning',
+                content: "评价发布失败",
+            })
+        });
     }
 
     const showCommentEditor = () => {

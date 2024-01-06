@@ -12,7 +12,7 @@ export async function GetCommentList(body: API.CommentListParams, options?: { [k
 }
 
 export async function CommitComment(body: API.CommitCommentParams, options?: { [key: string]: any }) {
-    return request<API.CommitCommentResp>('/api/v1.0/comment/commit-comment', {
+    return request<API.CommitCommentResp>('/api/v1.0/comment/publish-comment', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

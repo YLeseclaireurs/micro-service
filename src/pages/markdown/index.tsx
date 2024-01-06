@@ -105,7 +105,17 @@ export default function App() {
         // TODO 发布请求，数据提交接口
         CommitArticle(params).then((res) => {
             console.log("请求返回值", res)
-        })
+            messageApi.open({
+                type: 'success',
+                content: "内容发布成功",
+            })
+        }).catch(function(error) {
+            console.log(error);
+            messageApi.open({
+                type: 'warning',
+                content: "内容发布失败",
+            })
+        });
     }
 
     const style = {
