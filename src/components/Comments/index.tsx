@@ -2,7 +2,6 @@ import { message, Flex, Input, Avatar,Button } from 'antd';
 import  "./index.less";
 import { CommentOutlined,StarOutlined,HeartOutlined } from '@ant-design/icons';
 import React, {useEffect, useState} from "react";
-import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
 import {CommitComment, GetCommentList} from "@/services/comments/comment";
 
 export default function Comments() {
@@ -22,9 +21,7 @@ export default function Comments() {
     const [targetUID, setTargetUID] = useState(0)
     const [id, setId] = useState(3)
     const [showComment, setShowComment] = useState(false)
-    const [list, setList] = useState<API.Comment[]>([
-
-    ])
+    const [list, setList] = useState<API.Comment[]>([])
 
 
     useEffect(() => {
@@ -74,10 +71,7 @@ export default function Comments() {
 
     const submitComment = ()  => {
         if (comment == "") {
-            messageApi.open({
-                type: 'warning',
-                content: "评论内容不能为空",
-            });
+            messageApi.open({type: 'warning', content: "评论内容不能为空"});
             return
         }
 
@@ -124,9 +118,7 @@ export default function Comments() {
         console.log("show", showComment)
     }
 
-
     // 1.登陆功能  2.查询登陆用户的信息 3.提交评价内容 4.获取评价内容
-
     return (
         <div className="comments" >
             {contextHolder}
