@@ -18,7 +18,7 @@ import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-tab
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
-import { Link } from 'umi';
+import { Link, useParams } from 'umi';
 
 
 import {GetArticleDetail, GetArticleList} from "@/services/articles/article";
@@ -33,25 +33,22 @@ import Header from "@/components/Header";
 
 
 export default function DetailPage() {
-    // 页面数据获取
-    const params = {
-        id:1
-    };
     const [article, setArticle] = useState<API.Article>({});
     const [loading, setLoading] = useState(false);
     const editor_ref = useRef<Editor>(null);
 
-    useEffect(() => {
-        document.title = '你读过最有力量的一段文字是什么？';
+    document.title = (article.title ? article.title : "") + "栗·YLeseclaireurs"
 
-        const params = {
-            id:1
+    const urlParams  = useParams();
+
+    useEffect(() => {
+        const id = urlParams.id ? urlParams.id?.split(".")[0] : "1"
+        const params:API.ArticleDetailParams = {
+            id:parseInt(id, 10)
         }
         Object.keys(article).length === 0 && GetArticleDetail(params).then((res) => {
             setArticle(res.data? res.data: {})
             setLoading(true)
-            document.title = article.title ? article.title: "111"
-            console.log("请求返回值",  article)
         });
     });
 
@@ -63,11 +60,10 @@ export default function DetailPage() {
         maxHeight: 300,
     };
 
-
     return (
         <>
             <div className="app">
-                <Header />
+                <Header name=""/>
                 <div className="content">
                     <BackTop /> {/*https://semi.design/zh-CN/navigation/backtop*/}
                     <h2>{article.title}</h2>

@@ -14,13 +14,15 @@ export default  function HomePage () {
     const [insightList, setInsightList] = useState<API.Article[]>([])
 
     useEffect(() => {
-        document.title = '栗 · 思考';
+        document.title = "思考-栗·YLeseclaireurs"
 
-        insightList.length == 0 && GetArticleList({
+        const params = {
             category: "insight",
             page:1,
             size:20,
-        }).then((res) => {
+        }
+
+        insightList.length == 0 && GetArticleList(params).then((res) => {
             setInsightList(res.data? res.data:[])
             console.log("请求返回值",  insightList)
         });
@@ -28,11 +30,11 @@ export default  function HomePage () {
 
     const InsightArticlesComponents = insightList.map(insight=>
         <div key={insight.id}  className="item">
-            <div><h4><Link to="/detail?title=america-history.html"> {insight.title} </Link></h4></div>
-            <div><p>{insight.brief}阅读全文</p></div>
+            <div><h3><Link to={"/detail/" + insight.id?.toString() + ".html"}> {insight.title} </Link></h3></div>
+            <div><p>{insight.brief}<Link to={"/detail/" + insight.id?.toString() + ".html"}>阅读全文</Link></p></div>
             <div>
                     <span>2023年12月31日 11点39分</span>&nbsp;&nbsp;
-                    <span><CommentOutlined />&nbsp;{insight.comment_nums}条评价</span>&nbsp;&nbsp;
+                <span><Link to={"/detail/" + insight.id?.toString() + ".html"}><CommentOutlined />&nbsp;{insight.comment_nums}条评价</Link></span>&nbsp;&nbsp;
                     <span><ShareAltOutlined />&nbsp;
                         <Dropdown
                             render={
@@ -60,7 +62,7 @@ export default  function HomePage () {
 
     return (
         <div className="app">
-            <Header />
+            <Header  name="insight"/>
             <div className="content" >
                 {InsightArticlesComponents}
                 <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>

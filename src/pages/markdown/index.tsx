@@ -36,6 +36,9 @@ export default function App() {
     const editor_ref = useRef<Editor>(null);
 
 
+    useEffect(() => {
+        document.title = '栗 · 写作';
+    });
 
     /*useEffect(() => {
         document.title = '文章发布';

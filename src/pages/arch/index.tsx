@@ -13,7 +13,7 @@ export default  function HomePage () {
     const [archList, setArchList] = useState<API.Article[]>([])
 
     useEffect(() => {
-        document.title = '栗 · 架构';
+        document.title = "架构-栗·YLeseclaireurs"
 
         const params = {
             category: "arch",
@@ -28,11 +28,11 @@ export default  function HomePage () {
 
     const ArchArticlesComponents = archList.map(arch =>
         <div key={arch.id}  className="item">
-            <h4><Link to="/detail"> {arch.title} </Link></h4>
-            <div><p>{arch.brief}<Link to="/detail"> 阅读全文</Link></p></div>
+            <h3><Link to={"/detail/" + arch.id?.toString() + ".html"}> {arch.title} </Link></h3>
+            <div><p>{arch.brief}<Link to={"/detail/" + arch.id?.toString() + ".html"}> 阅读全文</Link></p></div>
             <div className="inter-box">
                 <span>2023年12月31日 11点39分</span>&nbsp;&nbsp;
-                <span><Link to="/detail?title=america-history.html"><CommentOutlined />&nbsp;{arch.comment_nums}条评价</Link></span>&nbsp;&nbsp;
+                <span><Link to={"/detail/" + arch.id?.toString() + ".html"}><CommentOutlined />&nbsp;{arch.comment_nums}条评价</Link></span>&nbsp;&nbsp;
                 <span><ShareAltOutlined />&nbsp;
                     <Dropdown
                         render={
@@ -61,7 +61,7 @@ export default  function HomePage () {
     return (
         <>
             <div className="app">
-                <Header />
+                <Header name="arch" />
                 <div className="content" >
                     {ArchArticlesComponents}
                     <div className="copyright"><span>京ICP备2021005198号-1 @copyright 栗</span></div>

@@ -28,7 +28,6 @@ export default function Comments() {
 
 
     useEffect(() => {
-        document.title = '你读过最有力量的一段文字是什么？';
         const params = {
             biz_id:1,
             page:1,
