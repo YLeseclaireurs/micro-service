@@ -35,22 +35,33 @@ export default function App() {
     const [messageApi, contextHolder] = message.useMessage();
     const editor_ref = useRef<Editor>(null);
 
+    const [article, setArticle] = useState<API.Article>({});
+
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const id = searchParams.get('id');
+    const idint = id ? parseInt(id): 1
+    console.log("参数", id)
 
     useEffect(() => {
         document.title = '栗 · 写作';
     });
 
-    /*useEffect(() => {
+    useEffect(() => {
         document.title = '文章发布';
-        const params = {
-            id:1
+        const params:API.ArticleDetailParams = {
+            id:idint
         };
-        content == "" && GetArticleDetail(params).then((res) => {
-            setContent(res.data.content? res.data.content :  "");
+        Object.keys(article).length === 0 && GetArticleDetail(params).then((res) => {
+            //setContent(res.data.content? res.data.content :  "");
+            setArticle(res.data? res.data: {})
             setLoading(true)
-            console.log("请求返回值", loading, content)
-        });
-    });*/
+            console.log("请求返回值",article.content)
+        }).catch(function(error) {
+            console.log(error);
+            setLoading(true)
+        });;
+    });
 
 
     const height = (window.innerHeight - 83).toString() + "px"
@@ -164,9 +175,9 @@ export default function App() {
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>
             </div>
             <div>
-                <Editor
+                {loading &&   <Editor
                     ref={editor_ref}
-                    initialValue={""}
+                    initialValue={article.content}
                     initialEditType="markdown"
                     previewStyle="vertical"
                     height={height}
@@ -216,7 +227,7 @@ export default function App() {
                              });*/
                         },
                     }}
-                />
+                />}
             </div>
         </div>
     );
