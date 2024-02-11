@@ -157,8 +157,8 @@ export default function App() {
             {contextHolder}
             <div style={{marginLeft:20, marginTop:20, marginBottom:20}}>
                 <Avatar style={{ width:45, height:45, color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -5 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>&nbsp;&nbsp;
-                <span style={{ "color": "#999"}}>若能虚己以游世，其孰能害之。</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标签：</span>
+                <span style={{ "color": "#333"}}>若能虚己以游世，其孰能害之。</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标签：</span>
                 <Select
                     defaultValue="架构"
                     style={{"width": 100}}
@@ -168,9 +168,9 @@ export default function App() {
                         { value: 'insight', label: '思考' },
                     ]}
                 />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>话题：</span><Input style={{"width": 100}} placeholder="" onChange={handleTopicChange} />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>URL：</span><Input style={{"width": 100}} placeholder="" onChange={handleURLChange} />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#999", fontWeight: 300, fontSize:15}}>标题：</span><Input style={{"width":300}} placeholder="" onChange={handleTitleChange} />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span><Input style={{"width": 100}} placeholder="" onChange={handleTopicChange} />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span><Input style={{"width": 100}} placeholder="" onChange={handleURLChange} />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span><Input style={{"width":300}} placeholder="" onChange={handleTitleChange} />&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>
             </div>
