@@ -48,7 +48,7 @@ export default function Comments() {
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
             <div className="comments-avatar-container">
-                <Avatar size={50}  src={comment.user?.avatar} />
+                <Avatar style={{zIndex: -50}} size={50}  src={comment.user?.avatar} />
             </div>
             <div className="comments-content-container">
                 <div className="comments-content-container-username">

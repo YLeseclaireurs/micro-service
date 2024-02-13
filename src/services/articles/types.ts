@@ -4,15 +4,15 @@ declare namespace API {
     type Article = {
         id?: number;
         title?: string;
-        url?:string;
+        url?: string;
         username?: string;
         city?: string;
-        category?:string;
+        category?: string;
         topics?: string;
-        brief?:string;
+        brief?: string;
         content?: string;
-        comment_nums?:number;
-        share_nums?:number;
+        comment_nums?: number;
+        share_nums?: number;
         updated_at?: string;
         created_at?: string;
     };
