@@ -49,9 +49,11 @@ export default function HomePage() {
             size:1,
         }
         GetArticleList(articleParams).then((res) => {
-            setArticle(res.data? res.data[0]: {})
+            const art = res.data? res.data[0]: {}
+            document.title = (art.title ? art.title : "") + " - 栗·YLeseclaireurs - 博客"
+            setArticle(art)
             setLoading(false)
-            document.title = (article.title ? article.title : "") + " - 栗·YLeseclaireurs - 博客"
+
         });
 
         GetArticleList({page:1, size:20}).then((res) => {

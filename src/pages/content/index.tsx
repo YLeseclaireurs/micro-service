@@ -45,6 +45,7 @@ export default function ContentPage() {
     useEffect(() => {
         GetArticleDetail({id: id}).then((res) => {
             setArticle(res.data)
+            document.title = (res.data.title ? res.data.title : "") + "栗·YLeseclaireurs"
             setLoading(false)
             editor_ref.current?.getInstance().setMarkdown(res.data.content)
             //editor_ref.current?.forceUpdate()
@@ -55,7 +56,7 @@ export default function ContentPage() {
             console.log("请求返回值",  res.data)
         });
 
-        document.title = (article.title ? article.title : "") + "栗·YLeseclaireurs"
+
     }, [id]);
 
     const [display, setDisplay] = useState("none")
