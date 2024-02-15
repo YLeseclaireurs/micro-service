@@ -156,7 +156,7 @@ export default function App() {
         <div className="App" >
             {contextHolder}
             <div style={{marginLeft:20, marginTop:20, marginBottom:20}}>
-                <Avatar style={{ width:45, height:45, color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -5 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar>&nbsp;&nbsp;
+                <Link to="/"><Avatar style={{ width:45, height:45, color: '#f56a00', backgroundColor: '#fde3cf', marginTop: -5 }} size="medium" hoverMask={hover} alt='栗的博客'>栗</Avatar></Link>&nbsp;&nbsp;
                 <span style={{ "color": "#333"}}>若能虚己以游世，其孰能害之。</span>&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标签：</span>
                 <Select
