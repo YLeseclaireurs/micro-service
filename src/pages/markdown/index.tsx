@@ -31,7 +31,7 @@ export default function App() {
     const [topic, setTopic] = useState("")
     const [url, setUrl] = useState("")
     const [title, setTitle] = useState("")
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
     const editor_ref = useRef<Editor>(null);
 
@@ -39,29 +39,19 @@ export default function App() {
 
 
     const searchParams = new URLSearchParams(window.location.search);
-    const id = searchParams.get('id');
-    const idint = id ? parseInt(id): 1
+    const queryID = searchParams.get('id');
+    const id = queryID ? parseInt(queryID): 1
     console.log("参数", id)
 
     useEffect(() => {
-        document.title = '栗 · 写作';
-    });
-
-    useEffect(() => {
         document.title = '文章发布';
-        const params:API.ArticleDetailParams = {
-            id:idint
-        };
-        Object.keys(article).length === 0 && GetArticleDetail(params).then((res) => {
-            //setContent(res.data.content? res.data.content :  "");
-            setArticle(res.data? res.data: {})
-            setLoading(true)
-            console.log("请求返回值",article.content)
-        }).catch(function(error) {
-            console.log(error);
-            setLoading(true)
-        });;
-    });
+        const params:API.ArticleDetailParams = {id:id};
+        GetArticleDetail(params).then((res) => {
+            setArticle(res.data)
+            setLoading(false)
+            console.log("请求返回值", article.content)
+        });
+    }, []);
 
 
     const height = (window.innerHeight - 83).toString() + "px"
@@ -168,14 +158,14 @@ export default function App() {
                         { value: 'insight', label: '思考' },
                     ]}
                 />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span><Input style={{"width": 100}} placeholder="" onChange={handleTopicChange} />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span><Input style={{"width": 100}} placeholder="" onChange={handleURLChange} />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span><Input style={{"width":300}} placeholder="" onChange={handleTitleChange} />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span>{!loading && <Input style={{"width": 100}} placeholder=""  defaultValue={article.topics} onChange={handleTopicChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span>{!loading && <Input style={{"width": 100}} placeholder="" defaultValue={article.url_token} onChange={handleURLChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span>{!loading && <Input style={{"width":300}} placeholder="" defaultValue={article.title} onChange={handleTitleChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>
             </div>
             <div>
-                {loading &&   <Editor
+                {!loading &&   <Editor
                     ref={editor_ref}
                     initialValue={article.content}
                     initialEditType="markdown"
@@ -188,9 +178,7 @@ export default function App() {
                         umlPlugin,
                         [colorPlugin, colorSyntaxOptions],
                     ]}
-                    toolbarItems={[
-                        ['heading', 'bold', 'italic', 'strike'], ['hr', 'quote'], ['ul', 'ol', 'task', 'indent', 'outdent'], ['table', 'image', 'link'], ['code', 'codeblock']
-                    ]}
+                    toolbarItems={[['heading', 'bold', 'italic', 'strike'], ['hr', 'quote'], ['ul', 'ol', 'task', 'indent', 'outdent'], ['table', 'image', 'link'], ['code', 'codeblock']]}
                     onChange={handleChange}
                     usageStatistics={false}
                     placeholder="写下你的想法.."
@@ -204,7 +192,7 @@ export default function App() {
                             UploadImage(param)
                                 .then((res) => {
                                     setImage(res.data?.url ? res.data.url :  "");
-                                    setLoading(true)
+                                    setLoading(false)
                                     console.log("请求返回值", loading, image)
                                 })
                                 .catch((err) => {

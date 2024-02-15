@@ -43,19 +43,13 @@ export default function HomePage() {
 
     const [article, setArticle] = useState<API.Article>({});
     useEffect(() => {
-        const articleParams = {
-            category: "",
-            page:1,
-            size:1,
-        }
+        const articleParams = {category: "", page:1, size:1}
         GetArticleList(articleParams).then((res) => {
             const art = res.data? res.data[0]: {}
             document.title = (art.title ? art.title : "") + " - 栗·YLeseclaireurs - 博客"
             setArticle(art)
             setLoading(false)
-
         });
-
     }, [id]);
 
     return (

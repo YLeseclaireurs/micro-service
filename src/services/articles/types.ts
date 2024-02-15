@@ -4,7 +4,7 @@ declare namespace API {
     type Article = {
         id?: number;
         title?: string;
-        url?: string;
+        url_token?: string;
         username?: string;
         city?: string;
         category?: string;

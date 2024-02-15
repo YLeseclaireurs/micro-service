@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {Tag } from 'antd';
-import {useParams} from 'umi';
+import {Link,useParams} from 'umi';
 import {BackTop} from '@douyinfe/semi-ui';
 
 import { Editor, Viewer } from '@toast-ui/react-editor';
@@ -17,9 +17,6 @@ import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-tab
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
-
-
-
 import {GetArticleDetail} from "@/services/articles/article";
 
 import Comments from "@/components/Comments";
@@ -29,12 +26,8 @@ import Catalogue from "@/components/Catalogue"
 import Qrcode from "@/components/Qrcode"
 import SideBar from "@/components/SideBar";
 
-
-
 import "@/styles/global.less"
 import "@/pages/content/index.less";
-
-
 
 export default function ContentPage() {
     const editor_ref = useRef<Editor>(null);
@@ -57,6 +50,8 @@ export default function ContentPage() {
         });
     }, [id]);
 
+    const markdownURL = "/markdown/?id=" + article.id
+
     return (
         <>
             <Qrcode/>
@@ -65,7 +60,10 @@ export default function ContentPage() {
                 <div className="content">
                     <BackTop/>
                     <h2 style={{marginTop: 20}}>{article.title}</h2>
-                    <span className="tag"><Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag><a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span></span>
+                    <span className="tag">
+                        <Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag>
+                        <a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span><Link to={markdownURL}>编辑</Link>
+                    </span>
                     {!loading && <Viewer ref={editor_ref} initialValue={article.content} plugins={[
                             [codeSyntaxHighlightPlugin, {highlighter: Prism}],
                             umlPlugin,
