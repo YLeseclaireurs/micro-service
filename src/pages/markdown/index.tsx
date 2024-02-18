@@ -49,6 +49,13 @@ export default function App() {
         GetArticleDetail(params).then((res) => {
             setArticle(res.data)
             setLoading(false)
+
+            setContent(res.data.content ? res.data.content: "")
+            setCategory(res.data.category ? res.data.category: "")
+            setTitle(res.data.title ? res.data.title: "")
+            setTopic(res.data.topics ? res.data.topics: "")
+            setUrl(res.data.url_token ? res.data.url_token: "")
+
             console.log("请求返回值", article.content)
         });
     }, []);
@@ -97,6 +104,7 @@ export default function App() {
         }
 
         const params = {
+            "id": id,
             "content": content,
             "category": category,
             "topics": topic,
