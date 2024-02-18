@@ -54,7 +54,7 @@ export default function HomePage() {
 
     return (
         <>
-            <Qrcode/>
+            <Qrcode url="https://ur7.cn"/>
             <SideBar/>
             <div className="app">
                 <div className="content">

@@ -44,7 +44,7 @@ export default function App() {
     const searchParams = new URLSearchParams(window.location.search);
     const debug = searchParams.get('debug')
     const queryID = searchParams.get('id');
-    const id = queryID ? parseInt(queryID): 1
+    const id = queryID ? parseInt(queryID): 0
     console.log("参数", id)
 
     console.log("debug", debug)
@@ -58,16 +58,16 @@ export default function App() {
         document.title = '文章发布';
         const params:API.ArticleDetailParams = {id:id};
         GetArticleDetail(params).then((res) => {
-            setArticle(res.data)
+            if (res.code == 0) {
+                setArticle(res.data)
+                setContent(res.data.content ? res.data.content: "")
+                setCategory(res.data.category ? res.data.category: "")
+                setTitle(res.data.title ? res.data.title: "")
+                setTopic(res.data.topics ? res.data.topics: "")
+                setUrl(res.data.url_token ? res.data.url_token: "")
+                console.log("请求返回值", article.content)
+            }
             setLoading(false)
-
-            setContent(res.data.content ? res.data.content: "")
-            setCategory(res.data.category ? res.data.category: "")
-            setTitle(res.data.title ? res.data.title: "")
-            setTopic(res.data.topics ? res.data.topics: "")
-            setUrl(res.data.url_token ? res.data.url_token: "")
-
-            console.log("请求返回值", article.content)
         });
     }, []);
 

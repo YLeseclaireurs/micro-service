@@ -57,11 +57,13 @@ export default function ContentPage() {
         });
     }, [id]);
 
-    const markdownURL = "/markdown/?id=" + article.id
+    const markdownURL = "/markdown/?id=" + article.id + "&debug=true"
+
+    const url = "https://ur7.cn/detail/" + article.id + ".html"
 
     return (
         <>
-            <Qrcode/>
+            <Qrcode url={url}/>
             <SideBar/>
             <div className="app">
                 <div className="content">
