@@ -23,6 +23,7 @@ import {UploadImage} from "@/services/tools/upload";
 import {initData} from "@/pages/markdown/data";
 
 import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
+import { history } from 'umi';
 
 export default function App() {
     const [image, setImage] = useState("");
@@ -31,6 +32,8 @@ export default function App() {
     const [topic, setTopic] = useState("")
     const [url, setUrl] = useState("")
     const [title, setTitle] = useState("")
+    const [token, setToken] = useState("")
+
     const [loading, setLoading] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
     const editor_ref = useRef<Editor>(null);
@@ -39,9 +42,17 @@ export default function App() {
 
 
     const searchParams = new URLSearchParams(window.location.search);
+    const debug = searchParams.get('debug')
     const queryID = searchParams.get('id');
     const id = queryID ? parseInt(queryID): 1
     console.log("参数", id)
+
+    console.log("debug", debug)
+    if (debug == null || debug.length == 0) {
+
+        // 跳转到指定路由
+        history.push('/');
+    }
 
     useEffect(() => {
         document.title = '文章发布';
@@ -64,6 +75,11 @@ export default function App() {
     const height = (window.innerHeight - 83).toString() + "px"
     console.log("高度", height)
 
+
+    const handleTokenChange = (value:any) => {
+        setToken(value.target.value)
+        console.log("token", token)
+    }
     const handleCategoryChange = (value:any) => {
         setCategory(value)
         console.log("标签", category)
@@ -105,6 +121,7 @@ export default function App() {
 
         const params = {
             "id": id,
+            "token": token,
             "content": content,
             "category": category,
             "topics": topic,
@@ -117,10 +134,18 @@ export default function App() {
         // TODO 发布请求，数据提交接口
         CommitArticle(params).then((res) => {
             console.log("请求返回值", res)
-            messageApi.open({
-                type: 'success',
-                content: "内容发布成功",
-            })
+            if (res.code == 0) {
+                messageApi.open({
+                    type: 'success',
+                    content: "内容发布成功",
+                })
+            }  else {
+                messageApi.open({
+                    type: 'warning',
+                    content: "内容发布失败",
+                })
+            }
+
         }).catch(function(error) {
             console.log(error);
             messageApi.open({
@@ -168,6 +193,7 @@ export default function App() {
                 />&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span>{!loading && <Input style={{"width": 100}} placeholder=""  defaultValue={article.topics} onChange={handleTopicChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span>{!loading && <Input style={{"width": 100}} placeholder="" defaultValue={article.url_token} onChange={handleURLChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>密码：</span>{!loading && <Input style={{"width": 100}} placeholder=""  onChange={handleTokenChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span>{!loading && <Input style={{"width":300}} placeholder="" defaultValue={article.title} onChange={handleTitleChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>

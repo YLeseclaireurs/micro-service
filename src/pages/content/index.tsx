@@ -38,6 +38,13 @@ export default function ContentPage() {
     const queryID = urlParams.id ? urlParams.id?.split(".")[0] : "1"
     const id = parseInt(queryID, 10)
 
+    const debug = location.search.split('&')[0].substr(7);
+    let showLogin = false
+
+    if (debug.length > 0 ) {
+        showLogin = true
+    }
+
     // 页面数据加载
     const [loading, setLoading] = useState(true);
     const [article, setArticle] = useState<API.Article>({});
@@ -62,7 +69,7 @@ export default function ContentPage() {
                     <h2 style={{marginTop: 20}}>{article.title}</h2>
                     <span className="tag">
                         <Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag>
-                        <a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span><Link to={markdownURL}>编辑</Link>
+                        <a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span>{showLogin && <Link to={markdownURL}>编辑</Link> }
                     </span>
                     {!loading && <Viewer ref={editor_ref} initialValue={article.content} plugins={[
                             [codeSyntaxHighlightPlugin, {highlighter: Prism}],
