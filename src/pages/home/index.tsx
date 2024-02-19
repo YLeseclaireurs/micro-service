@@ -67,7 +67,7 @@ export default function HomePage() {
                     ]}/>}
                     <Comments/>
                     <Catalogue prev={resp.prev}  next={resp.next} total={resp.total} />
-                    {/*<SomeLikes recommends={resp.recommends}/>*/}
+                    <SomeLikes recommends={resp.recommends}/>
                     <Footer />
                 </div>
             </div>
