@@ -1,5 +1,16 @@
 import request from 'umi-request';
 
+export async function GetHomePage(body: any, options?: { [key: string]: any }) {
+    return request<API.ArticleDetailResp>('/api/v1.0/article/retrieve-home-page', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: body,
+        ...(options || {}),
+    });
+}
+
 export async function GetArticleDetail(body: API.ArticleDetailParams, options?: { [key: string]: any }) {
     return request<API.ArticleDetailResp>('/api/v1.0/article/retrieve-article-detail', {
         method: 'POST',

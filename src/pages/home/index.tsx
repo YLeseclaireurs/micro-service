@@ -17,7 +17,7 @@ import '@toast-ui/editor-plugin-table-merged-cell/dist/toastui-editor-plugin-tab
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 
-import {GetArticleList} from "@/services/articles/article";
+import {GetArticleList, GetHomePage} from "@/services/articles/article";
 
 import Comments from "@/components/Comments";
 import Footer from "@/components/Footer";
@@ -41,14 +41,12 @@ export default function HomePage() {
     const queryID = urlParams.id ? urlParams.id?.split(".")[0] : "1"
     const id = parseInt(queryID, 10)
 
-    const [article, setArticle] = useState<API.Article>({});
+    const [resp, setResp] = useState<API.ArticleContentDetail>({});
     useEffect(() => {
-        const articleParams = {category: "", page:1, size:1}
-        GetArticleList(articleParams).then((res) => {
-            const art = res.data? res.data[0]: {}
-            document.title = (art.title ? art.title : "") + " - 栗·YLeseclaireurs - 博客"
-            setArticle(art)
+        GetHomePage({}).then((res) => {
+            setResp(res.data)
             setLoading(false)
+            document.title = (resp.article?.title ? resp.article?.title : "") + " - 栗·YLeseclaireurs - 博客"
         });
     }, [id]);
 
@@ -59,17 +57,17 @@ export default function HomePage() {
             <div className="app">
                 <div className="content">
                     <BackTop/>
-                    <h2 style={{marginTop: 20}}>{article.title}</h2>
+                    <h2 style={{marginTop: 20}}>{resp.article?.title}</h2>
                     <span className="tag"><Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag><a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span></span>
-                    {!loading && <Viewer ref={editor_ref} initialValue={article.content} plugins={[
+                    {!loading && <Viewer ref={editor_ref} initialValue={resp.article?.content} plugins={[
                         [codeSyntaxHighlightPlugin, {highlighter: Prism}],
                         umlPlugin,
                         [chartPlugin, chartOptions],
                         tableMergedCellPlugin,
                     ]}/>}
                     <Comments/>
-                    <Catalogue />
-                    <SomeLikes />
+                    <Catalogue prev={resp.prev}  next={resp.next} total={resp.total} />
+                    {/*<SomeLikes recommends={resp.recommends}/>*/}
                     <Footer />
                 </div>
             </div>

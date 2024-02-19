@@ -17,6 +17,14 @@ declare namespace API {
         created_at?: string;
     };
 
+    type ArticleContentDetail = {
+        article?: Article;
+        prev?:Article;
+        next?:Article;
+        total?:number;
+        recommends?: [Article];
+    }
+
 
     // 文章详情
     type ArticleDetailParams = {
@@ -25,7 +33,7 @@ declare namespace API {
     type ArticleDetailResp = {
         code:number;
         message:string;
-        data: Article;
+        data: ArticleContentDetail;
     };
 
 

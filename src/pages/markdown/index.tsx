@@ -38,7 +38,7 @@ export default function App() {
     const [messageApi, contextHolder] = message.useMessage();
     const editor_ref = useRef<Editor>(null);
 
-    const [article, setArticle] = useState<API.Article>({});
+    const [resp, setResp] = useState<API.ArticleContentDetail>({});
 
 
     const searchParams = new URLSearchParams(window.location.search);
@@ -59,13 +59,13 @@ export default function App() {
         const params:API.ArticleDetailParams = {id:id};
         GetArticleDetail(params).then((res) => {
             if (res.code == 0) {
-                setArticle(res.data)
-                setContent(res.data.content ? res.data.content: "")
-                setCategory(res.data.category ? res.data.category: "")
-                setTitle(res.data.title ? res.data.title: "")
-                setTopic(res.data.topics ? res.data.topics: "")
-                setUrl(res.data.url_token ? res.data.url_token: "")
-                console.log("请求返回值", article.content)
+                setResp(res.data)
+                setContent(res.data.article?.content ? res.data.article?.content: "")
+                setCategory(res.data.article?.category ? res.data.article?.category: "")
+                setTitle(res.data.article?.title ? res.data.article?.title: "")
+                setTopic(res.data.article?.topics ? res.data.article?.topics: "")
+                setUrl(res.data.article?.url_token ? res.data.article?.url_token: "")
+                console.log("请求返回值", res.data.article?.content)
             }
             setLoading(false)
         });
@@ -191,17 +191,17 @@ export default function App() {
                         { value: 'insight', label: '思考' },
                     ]}
                 />&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span>{!loading && <Input style={{"width": 100}} placeholder=""  defaultValue={article.topics} onChange={handleTopicChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span>{!loading && <Input style={{"width": 100}} placeholder="" defaultValue={article.url_token} onChange={handleURLChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>话题：</span>{!loading && <Input style={{"width": 100}} placeholder=""  defaultValue={resp.article?.topics} onChange={handleTopicChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>URL：</span>{!loading && <Input style={{"width": 100}} placeholder="" defaultValue={resp.article?.url_token} onChange={handleURLChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style={{color: "#333", fontWeight: 400, fontSize:14}}>密码：</span>{!loading && <Input style={{"width": 100}} placeholder=""  onChange={handleTokenChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span>{!loading && <Input style={{"width":300}} placeholder="" defaultValue={article.title} onChange={handleTitleChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{color: "#333", fontWeight: 400, fontSize:14}}>标题：</span>{!loading && <Input style={{"width":300}} placeholder="" defaultValue={resp.article?.title} onChange={handleTitleChange} />}&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link target="_blank" to="/detail" ><Button icon={<EyeOutlined />}>预览</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button icon={<FormOutlined />} style={{ height:32, display:"inline", marginLeft:0, marginTop:0, marginBottom:0}} onClick={doCommit}>发布</Button>
             </div>
             <div>
                 {!loading &&   <Editor
                     ref={editor_ref}
-                    initialValue={article.content}
+                    initialValue={resp.article?.content}
                     initialEditType="markdown"
                     previewStyle="vertical"
                     height={height}
