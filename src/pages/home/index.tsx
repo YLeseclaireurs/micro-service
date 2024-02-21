@@ -46,7 +46,7 @@ export default function HomePage() {
         GetHomePage({}).then((res) => {
             setResp(res.data)
             setLoading(false)
-            document.title = (resp.article?.title ? resp.article?.title : "") + " - 栗·YLeseclaireurs - 博客"
+            document.title = (res.data.article?.title ? res.data.article?.title : "") + " - 栗·YLeseclaireurs - 博客"
         });
     }, [id]);
 

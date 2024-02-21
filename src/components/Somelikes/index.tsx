@@ -1,14 +1,11 @@
 import React from "react";
-import {data} from "@/pages/content/data";
 import "./index.less"
 
 export default function SomeLikes(props: any) {
 
-    const recommends = props.recommends
+    const recommends = props?.recommends
 
     const count = recommends?.length
-
-    const a = true
 
     const SomeLikes = recommends?.map((item: API.Article, index: number) =>
         <div key={index} className="some_likes_item"  style={{borderBottom: `${index+1==count ? "none": "1px solid #f5f5f5"}` }}>
