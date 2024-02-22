@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Avatar} from "@douyinfe/semi-ui";
-import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {Link} from 'umi';
 import {GetArticleList} from "@/services/articles/article";
 import "./index.less"

@@ -67,7 +67,7 @@ export default function HomePage() {
             <div className="app" onWheel={handleScroll}>
                 <div className="content" >
                     <Header display={display} />
-                    <BackTop/>
+                    <BackTop className="back-top"/>
                     <h2 style={{marginTop: 60}}>{resp.article?.title}</h2>
                     <span className="tag"><Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag><a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span></span>
                     {!loading && <Viewer ref={editor_ref} initialValue={resp.article?.content} plugins={[
