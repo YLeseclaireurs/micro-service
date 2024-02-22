@@ -5,6 +5,7 @@ import  "./index.less";
 import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import SideBar from "@/components/SideBar";
 
+import avatar from "@/assets/avatar.png"
 
 export default function Header(props:any) {
     const headerDisplay = props.display
@@ -26,7 +27,7 @@ export default function Header(props:any) {
                     {display == "none" ? <MenuUnfoldOutlined style={{fontSize: 15, color: "#666"}}/> : <MenuFoldOutlined style={{fontSize: 15, color: "#666"}}/>}
                 </span>
                 <span className="inline"  style={{marginLeft:10, color:"#999", fontSize:14}}>若能虚己以游世，其孰能害之。</span>
-                <Avatar style={{}} className="avatar" alt="cute cat" size="extra-small" src={image} />
+                <Avatar style={{}} className="avatar" alt="cute cat" size="extra-small" src={avatar} />
             </div>
         </>
 
