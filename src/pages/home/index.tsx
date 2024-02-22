@@ -25,6 +25,7 @@ import SomeLikes from "@/components/Somelikes"
 import Catalogue from "@/components/Catalogue"
 import Qrcode from "@/components/Qrcode"
 import SideBar from "@/components/SideBar";
+import Header from "@/components/Header";
 
 import "@/styles/global.less"
 import "@/pages/content/index.less";
@@ -46,18 +47,28 @@ export default function HomePage() {
         GetHomePage({}).then((res) => {
             setResp(res.data)
             setLoading(false)
-            document.title = (res.data.article?.title ? res.data.article?.title : "") + " - 栗·YLeseclaireurs - 博客"
+            document.title = (res.data?.article?.title ? res.data?.article?.title : "") + " - 栗·YLeseclaireurs - 博客"
         });
     }, [id]);
 
+    const [display, setDisplay] = useState("block")
+    const handleScroll = () =>{
+        let scrollTop  = document.documentElement.scrollTop;  //滚动条滚动高度
+        if (scrollTop > 50) {
+            setDisplay("none")
+            console.log(scrollTop)
+        } else {
+            setDisplay("inline-block")
+        }
+    }
     return (
         <>
             <Qrcode url="https://ur7.cn"/>
-            <SideBar/>
-            <div className="app">
-                <div className="content">
+            <div className="app" onWheel={handleScroll}>
+                <div className="content" >
+                    <Header display={display} />
                     <BackTop/>
-                    <h2 style={{marginTop: 20}}>{resp.article?.title}</h2>
+                    <h2 style={{marginTop: 60}}>{resp.article?.title}</h2>
                     <span className="tag"><Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag><a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span></span>
                     {!loading && <Viewer ref={editor_ref} initialValue={resp.article?.content} plugins={[
                         [codeSyntaxHighlightPlugin, {highlighter: Prism}],

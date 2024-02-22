@@ -28,6 +28,7 @@ import SideBar from "@/components/SideBar";
 
 import "@/styles/global.less"
 import "@/pages/content/index.less";
+import Header from "@/components/Header";
 
 export default function ContentPage() {
     const editor_ref = useRef<Editor>(null);
@@ -62,14 +63,23 @@ export default function ContentPage() {
 
     const url = "https://ur7.cn/detail/" + resp.article?.id + ".html"
 
+    const [display, setDisplay] = useState("block")
+    const handleScroll = () =>{
+        let scrollTop  = document.documentElement.scrollTop;  //滚动条滚动高度
+        if (scrollTop > 50) {
+            setDisplay("none")
+        } else {
+            setDisplay("inline-block")
+        }
+    }
     return (
         <>
             <Qrcode url={url}/>
-            <SideBar/>
-            <div className="app">
+            <div className="app" onWheel={handleScroll}>
                 <div className="content">
-                    <BackTop/>
-                    <h2 style={{marginTop: 20}}>{resp.article?.title}</h2>
+                    <Header display={display}/>
+                    <BackTop className="back-top"/>
+                    <h2 style={{marginTop: 60}}>{resp.article?.title}</h2>
                     <span className="tag">
                         <Tag style={{color: "#999"}} color="rgba(0,0,0,.05)">原创</Tag>
                         <a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span>{showLogin && <Link to={markdownURL}>编辑</Link> }

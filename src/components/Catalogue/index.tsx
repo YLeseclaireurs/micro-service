@@ -13,11 +13,11 @@ export default function Catalogue(props:any) {
     let prevURL, nextURL = ""
     if (prev != null) {
         showPrev = true
-        prevURL = "/detail/" + prev.id +".html"
+        prevURL = "/detail/" + prev?.id +".html"
     }
     if (next != null) {
         showNext = true
-        nextURL = "/detail/" + next.id +".html"
+        nextURL = "/detail/" + next?.id +".html"
     }
 
     return (
