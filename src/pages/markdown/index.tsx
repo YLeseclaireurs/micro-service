@@ -26,7 +26,7 @@ import {CommitArticle, GetArticleDetail} from "@/services/articles/article";
 import { history } from 'umi';
 
 export default function App() {
-    const [image, setImage] = useState("");
+    const [imageURL, setImageURL] = useState("");
     const [content, setContent] = useState('')
     const [category, setCategory] = useState("arch")
     const [topic, setTopic] = useState("")
@@ -217,10 +217,27 @@ export default function App() {
                     usageStatistics={false}
                     placeholder="写下你的想法.."
                     hooks={{
-                        addImageBlobHook: (fileOrBlob: Blob | File, callback: (url: string, text?: string) => void) => {
+                        addImageBlobHook: (file: any, callback: (arg0: any, arg1: string) => void) => {
+                            const formData = new FormData()
+                            formData.append('file', file)
+                            UploadImage(formData).then((res) => {
+                                const url = res.data?.url ? res.data.url :  ""
+                                setImageURL(url);
+                                setLoading(false)
+                                callback(url, "我的博客头图");
+                                console.log("参数", formData);
+                                console.log("请求返回值2222", res)
+                            })
+                            .catch((err) => {
+                                console.log("错误", err);
+                            });
+
+                            return false;
+                        }
+                        /*addImageBlobHook: (fileOrBlob: Blob | File, callback: (url: string, text?: string) => void) => {
                             const param = new FormData();
                             param.append('file', fileOrBlob);
-                            console.log("param", param)
+                            console.log("param", param.get("file"))
 
                             // 图片上传请求
                             UploadImage(param)
@@ -232,22 +249,7 @@ export default function App() {
                                 .catch((err) => {
                                     console.log("错误", err);
                                 });
-
-                            /* request({
-                                 url: '/api/v1.0/tools/upload-image',
-                                 headers: { 'Content-Type': 'multipart/form-data' },
-                                 method: 'POST',
-                                 data: param,
-                             })
-                             .then((res) => {
-                                 const { data } = res as any;
-                                 const { url, name } = data || {};
-                                 callback(url, name);
-                             })
-                             .catch((err) => {
-                                 console.log(err);
-                             });*/
-                        },
+                        },*/
                     }}
                 />}
             </div>
