@@ -12,7 +12,7 @@ export default function Qrcode(props:any) {
                     <QRCode size={110} bordered={false} value={url} style={{marginLeft: 13}}/>
                     <div style={{paddingBottom: 5}}>
                         <div>微信扫一扫</div>
-                        <div>关注该公众号</div>
+                        <div>随时阅读更容易</div>
                     </div>
                 </div>
             </div>
