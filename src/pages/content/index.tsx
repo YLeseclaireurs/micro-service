@@ -90,7 +90,7 @@ export default function ContentPage() {
                             [chartPlugin, chartOptions],
                             tableMergedCellPlugin,
                     ]}/>}
-                    <Comments/>
+                    <Comments id={resp.article?.id}/>
                     <Catalogue prev={resp.prev}  next={resp.next} total={resp.total} />
                     <SomeLikes recommends={resp.recommends}/>
                     <Footer />

@@ -21,3 +21,15 @@ export async function CommitComment(body: API.CommitCommentParams, options?: { [
         ...(options || {}),
     });
 }
+
+
+export async function AddCommentLikeNum(body: API.AddCommentLikeNumParams, options?: { [key: string]: any }) {
+    return request<API.AddCommentLikeNumResp>('/api/v1.0/comment/add-comment-like-num', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: body,
+        ...(options || {}),
+    });
+}

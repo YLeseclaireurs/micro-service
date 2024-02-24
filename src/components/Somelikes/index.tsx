@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'umi';
 import "./index.less"
 
 export default function SomeLikes(props: any) {
@@ -9,8 +10,8 @@ export default function SomeLikes(props: any) {
 
     const SomeLikes = recommends?.map((item: API.Article, index: number) =>
         <div key={index} className="some_likes_item"  style={{borderBottom: `${index+1==count ? "none": "1px solid #f5f5f5"}` }}>
-            <div className="some_likes_title">{item.title}</div>
-            <div className="some_likes_desc">{item.topics}</div>
+            <div className="some_likes_title"><Link to={"/detail/" + item.id?.toString() + ".html"}>{item.title}</Link></div>
+            <div className="some_likes_desc"><Link to={"/detail/" + item.id?.toString() + ".html"}>{item.topics}</Link></div>
         </div>
     );
 

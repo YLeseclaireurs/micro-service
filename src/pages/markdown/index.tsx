@@ -234,22 +234,6 @@ export default function App() {
 
                             return false;
                         }
-                        /*addImageBlobHook: (fileOrBlob: Blob | File, callback: (url: string, text?: string) => void) => {
-                            const param = new FormData();
-                            param.append('file', fileOrBlob);
-                            console.log("param", param.get("file"))
-
-                            // 图片上传请求
-                            UploadImage(param)
-                                .then((res) => {
-                                    setImage(res.data?.url ? res.data.url :  "");
-                                    setLoading(false)
-                                    console.log("请求返回值", loading, image)
-                                })
-                                .catch((err) => {
-                                    console.log("错误", err);
-                                });
-                        },*/
                     }}
                 />}
             </div>
