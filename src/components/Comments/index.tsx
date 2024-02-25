@@ -41,11 +41,21 @@ export default function Comments(props: any) {
     const  doLike = (comment: API.Comment) => {
         AddCommentLikeNum({id: comment.id}).then((res) => {
             if (res.code == 0) {
-
+                const arr = list.map((item, i) => {
+                    const likeNum = item?.like_num ? item?.like_num : 0
+                    if (comment.id === item.id) {
+                        return { ...item, ["like_num"] : likeNum + 1 };
+                    } else {
+                        return item;
+                    }
+                });
+                setList(arr);
             }
         });
         console.log("评价", comment)
     }
+
+
 
     const commentList = list.map(comment =>
         <div key={comment.id} className="comments-item">
@@ -151,9 +161,7 @@ export default function Comments(props: any) {
                             style={{height: 80, resize: 'none'}}
                         />
                     </Flex>
-                    <div className="comments-editor-bottom">
-                        <Button onClick={submitComment}>发布评论</Button>
-                    </div>
+                    <div className="comments-editor-bottom"><Button onClick={submitComment}>发布评论</Button></div>
                 </div>
             }
             <div className="comments-list">

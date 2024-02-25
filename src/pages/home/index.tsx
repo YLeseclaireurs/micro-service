@@ -56,7 +56,7 @@ export default function HomePage() {
         let scrollTop  = document.documentElement.scrollTop;  //滚动条滚动高度
         if (scrollTop > 50) {
             setDisplay("none")
-            console.log(scrollTop)
+            //console.log(scrollTop)
         } else {
             setDisplay("inline-block")
         }
