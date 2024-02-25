@@ -24,7 +24,7 @@ export default function SideBar(props: any) {
     );
 
     return (
-        <div style={{height: "100%"}} className="side" >
+        <div style={{height: "100%", display: display}} className="side" >
             <div style={{height: "100%", display: display}} className="side-content side-content-top">
                 <div className="item">{ArticlesComponents}</div>
             </div>

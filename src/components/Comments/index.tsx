@@ -44,7 +44,6 @@ export default function Comments(props: any) {
 
             }
         });
-
         console.log("评价", comment)
     }
 

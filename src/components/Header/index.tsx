@@ -9,6 +9,8 @@ import avatar from "@/assets/avatar.png"
 
 export default function Header(props:any) {
     const headerDisplay = props.display
+
+
     const [display, setDisplay] = useState("none")
     const onToggle = () => {
         if (display == "none") {
