@@ -82,7 +82,7 @@ export default function ContentPage() {
                     <h2 style={{marginTop: 60}}>{resp.article?.title}</h2>
                     <span className="tag">
                         <Tag style={{color: "#999", zIndex:-1}} color="rgba(0,0,0,.05)">原创</Tag>
-                        <a className="author">栗·Leseclaireurs</a> <span> 2023-12-05 19:34 发表于北京 </span>{showLogin && <Link to={markdownURL}>编辑</Link> }
+                        <a className="author">Leseclaireurs</a> <span>12-05 19:34 发表于北京</span>{showLogin && <Link to={markdownURL}>编辑</Link> }
                     </span>
                     {!loading && <Viewer ref={editor_ref} initialValue={resp.article?.content} plugins={[
                             [codeSyntaxHighlightPlugin, {highlighter: Prism}],
