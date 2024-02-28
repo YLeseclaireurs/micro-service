@@ -55,7 +55,7 @@ export default function App() {
     }
 
     useEffect(() => {
-        document.title = '文章发布';
+        document.title = '文章发布 - Leseclaireurs';
         const params:API.ArticleDetailParams = {id:id};
         GetArticleDetail(params).then((res) => {
             if (res.code == 0) {

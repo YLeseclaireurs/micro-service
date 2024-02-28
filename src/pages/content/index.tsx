@@ -51,7 +51,7 @@ export default function ContentPage() {
     const [resp, setResp] = useState<API.ArticleContentDetail>({});
     useEffect(() => {
         GetArticleDetail({id: id}).then((res) => {
-            document.title = (res.data.article?.title ? res.data.article.title : "") + "栗·YLeseclaireurs"
+            document.title = (res.data.article?.title ? res.data.article.title : "") + " - Leseclaireurs"
             setResp(res.data)
             setLoading(false)
             editor_ref.current?.getInstance().setMarkdown(res.data.article?.content)
